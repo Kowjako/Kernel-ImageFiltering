@@ -24,5 +24,37 @@ namespace KernelFilters
         {
             InitializeComponent();
         }
+
+        private void closeBtn_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void headerPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    TextBox tmp = null;
+                    if (i != 4)
+                    {
+                        tmp = new TextBox() { Text = "0", Margin = new Thickness(0,0,0,6), Width = 25, Height = 25, Name = $"box{i}{j}" };
+                    }
+                    else
+                    {
+                        tmp = new TextBox() { Text = "0", Margin = new Thickness(0,0,0,6), Width = 25, Height = 25, Name = $"box{i}{j}" };
+                    }
+                    Grid.SetRow(tmp, i);
+                    Grid.SetColumn(tmp, j);
+                    matrixGrid.Children.Add(tmp);
+                }
+            }
+        }
     }
 }
