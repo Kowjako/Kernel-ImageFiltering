@@ -8,14 +8,14 @@ using System.Windows;
 
 namespace KernelFilters
 {
-    class DefaultDialogService
+    class DefaultDialogService : IDialogService
     {
         public string FilePath { get; set; }
 
         public bool OpenFileDialog()
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Txt files (*.txt)|*.txt";
+            ofd.Filter = "Image files (*.png, *.bmp, *.jpg)|*.png;*.bmp;*.jpg";
             if (ofd.ShowDialog() == true)
             {
                 FilePath = ofd.FileName;

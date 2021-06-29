@@ -37,9 +37,9 @@
             <GroupBox Header="Obraz wejściowy" FontFamily="Consolas" Margin="5,5,5,5" Grid.Row="1" Grid.Column="0">
                 <StackPanel>
                     <Border BorderBrush="Gray" BorderThickness="0.5" Margin="0,0,0,10">
-                        <Image Margin="0,0,0,10" x:Name="loadedImage" Width="250" Height="150"/>
+                        <Image Source="{Binding LoadedImage}" x:Name="loadedImage" Width="270" Height="160"/>
                     </Border>
-                    <Button Background="White" BorderBrush="White" Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="Załaduj obrazek" />
+                    <Button Command="{Binding LoadImageCommand}" Background="White" BorderBrush="White" Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="Załaduj obrazek" />
                 </StackPanel>
             </GroupBox>
             <GroupBox x:Name="matrixBox" Header="Macierz" FontFamily="Consolas" Margin="5,5,5,5" Grid.Row="2" Grid.Column="0">
