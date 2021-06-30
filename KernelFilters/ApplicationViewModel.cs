@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KernelFilters.FitersWithoutKernel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -44,9 +45,9 @@ namespace KernelFilters
                             loadedImage = BitmapFromUri(new Uri(imagePath));
                             OnPropertyChanged("LoadedImage");
 
-                            /* GrayScaleFilter gsf = new GrayScaleFilter();
+                            BlackWhiteFilter gsf = new BlackWhiteFilter();
                             filteredImage = gsf.Filterize(loadedImage);
-                            OnPropertyChanged("FilteredImage"); */
+                            OnPropertyChanged("FilteredImage"); 
                         }
                     }));
             }

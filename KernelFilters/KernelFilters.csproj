@@ -68,7 +68,9 @@
     </ApplicationDefinition>
     <Compile Include="ApplicationViewModel.cs" />
     <Compile Include="Converter.cs" />
-    <Compile Include="GrayScaleFilter.cs" />
+    <Compile Include="FitersWithoutKernel\BlackWhiteFilter.cs" />
+    <Compile Include="FitersWithoutKernel\GrayScaleFilter.cs" />
+    <Compile Include="FitersWithoutKernel\NegativeFilter.cs" />
     <Compile Include="IFilter.cs" />
     <Compile Include="RelayCommand.cs" />
     <Page Include="MainWindow.xaml">
