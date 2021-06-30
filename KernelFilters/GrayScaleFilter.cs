@@ -29,7 +29,6 @@ namespace KernelFilters
             }
 
             outputImageBMP = new Bitmap(startImageBMP.Width, startImageBMP.Height);
-            MessageBox.Show(startImageBMP.Height + " " + startImageBMP.Width);
 
             for (int j = 0; j < startImageBMP.Height; j++)
             {
@@ -37,13 +36,13 @@ namespace KernelFilters
                 {
                     UInt32 pixel = (UInt32)(startImageBMP.GetPixel(i, j).ToArgb());
 
-                    float R = (pixel & 0x00FF0000) >> 16;   /* A - 1 byte, R - 1 byte, G - 1 byte, B - 1 byte  oraz trzeba przesunac w koniec (16 bitow w prawo)*/
+                    float R = (pixel & 0x00FF0000) >> 16;   /* A - 1 byte, R - 1 byte, G - 1 byte, B - 1 byte + logiczne AND oraz trzeba przesunac w koniec (16 bitow w prawo)*/
                     float G = (pixel & 0x0000FF00) >> 8;
                     float B = (pixel & 0x000000FF);
 
                     R = G = B = (R + G + B) / 3.0f;
 
-                    UInt32 newPixel = 0xFF000000 | ((UInt32)R << 16) | ((UInt32)G << 8) | (UInt32)B;
+                    UInt32 newPixel = 0xFF000000 | ((UInt32)R << 16) | ((UInt32)G << 8) | (UInt32)B; /* logiczne dodawanie do utworzenia pixela */
                     outputImageBMP.SetPixel(i, j, System.Drawing.Color.FromArgb((int)newPixel));
                 }
             }

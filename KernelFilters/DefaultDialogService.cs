@@ -27,6 +27,7 @@ namespace KernelFilters
         public bool SaveFileDialog()
         {
             SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Image files (*.png, *.bmp, *.jpg)|*.png;*.bmp;*.jpg";
             if (sfd.ShowDialog() == true)
             {
                 FilePath = sfd.FileName;
