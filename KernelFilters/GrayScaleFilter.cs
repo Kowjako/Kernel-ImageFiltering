@@ -16,18 +16,9 @@ namespace KernelFilters
     {
         public ImageSource Filterize(ImageSource sourceImage)
         {
-            BitmapImage startImage = sourceImage as BitmapImage;
             Bitmap startImageBMP = null, outputImageBMP = null;
 
-            using (MemoryStream outStream = new MemoryStream())
-            {
-                BitmapEncoder enc = new BmpBitmapEncoder();
-                enc.Frames.Add(BitmapFrame.Create(startImage));
-                enc.Save(outStream);
-                Bitmap bitmap = new Bitmap(outStream);
-                startImageBMP = new Bitmap(bitmap);
-            }
-
+            startImageBMP = Converter.ImageSourceToBitmap(sourceImage);
             outputImageBMP = new Bitmap(startImageBMP.Width, startImageBMP.Height);
 
             for (int j = 0; j < startImageBMP.Height; j++)
@@ -46,18 +37,7 @@ namespace KernelFilters
                     outputImageBMP.SetPixel(i, j, System.Drawing.Color.FromArgb((int)newPixel));
                 }
             }
-
-            using (MemoryStream memory = new MemoryStream())
-            {
-                outputImageBMP.Save(memory, System.Drawing.Imaging.ImageFormat.Bmp);
-                memory.Position = 0;
-                BitmapImage bitmapimage = new BitmapImage();
-                bitmapimage.BeginInit();
-                bitmapimage.StreamSource = memory;
-                bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapimage.EndInit();
-                return bitmapimage;
-            }
+            return Converter.BitmapToImageSource(outputImageBMP);
         }
     }
 }

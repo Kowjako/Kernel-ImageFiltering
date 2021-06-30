@@ -67,6 +67,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ApplicationViewModel.cs" />
+    <Compile Include="Converter.cs" />
     <Compile Include="GrayScaleFilter.cs" />
     <Compile Include="IFilter.cs" />
     <Compile Include="RelayCommand.cs" />
