@@ -36,8 +36,8 @@
             <Image x:Name="closeBtn" MouseUp="closeBtn_MouseUp" Margin="0,5,5,5" Grid.Column="1" HorizontalAlignment="Right" Source="Icons/exit.png" Cursor="Hand"/>
             <GroupBox Header="Obraz wejściowy" FontFamily="Consolas" Margin="5,5,5,5" Grid.Row="1" Grid.Column="0">
                 <StackPanel>
-                    <Border BorderBrush="Gray" BorderThickness="0.5" Margin="0,0,0,10">
-                        <Image Source="{Binding LoadedImage}" x:Name="loadedImage" Width="270" Height="160"/>
+                    <Border HorizontalAlignment="Center" BorderBrush="Gray" BorderThickness="0.5" Margin="0,0,0,10">
+                        <Image Source="{Binding LoadedImage}" Margin="3,3,3,3" Stretch="Fill" x:Name="loadedImage" Width="264" Height="153"/>
                     </Border>
                     <Button Command="{Binding LoadImageCommand}" Background="White" BorderBrush="White" Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="Załaduj obrazek" />
                 </StackPanel>
@@ -84,13 +84,13 @@
             <GroupBox FontFamily="Consolas" Header="Obraz wyjściowy" Margin="5,5,5,5" Grid.Row ="1" Grid.RowSpan="2" Grid.Column="1">
                 <StackPanel>
                     <Border Margin="0,0,0,10" BorderBrush="Gray" BorderThickness="0.5">
-                        <Image x:Name="outputImage" Width="570" Height="420"/>
+                        <Image Stretch="Fill" Source="{Binding FilteredImage}" x:Name="outputImage" Width="570" Height="420"/>
                     </Border>
                     <Button Background="White" BorderBrush="White" Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="Zapisz obrazek"/>
                 </StackPanel>
             </GroupBox>
             <GroupBox FontFamily="Consolas" Header="Presety" Margin="5,5,5,10" Grid.Row="3" Grid.RowSpan="2" Grid.Column="1">
-                
+
             </GroupBox>
         </Grid>
     </Border>

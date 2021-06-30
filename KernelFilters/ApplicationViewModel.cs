@@ -16,12 +16,12 @@ namespace KernelFilters
         /* Otwieranie/zapisywanie plikow */
         protected IDialogService dialogService;
         /* Ladowanie obrazku */
-        private ImageSource loadedImage;
+        private ImageSource loadedImage, filteredImage;
         /* Commandy */
         private RelayCommand loadImageCommand;
         /* Properties for Binding*/
         public ImageSource LoadedImage => loadedImage;
-
+        public ImageSource FilteredImage => filteredImage;
         
 
         public ApplicationViewModel(IDialogService service)
@@ -41,6 +41,10 @@ namespace KernelFilters
                             string imagePath = dialogService.FilePath;
                             loadedImage = BitmapFromUri(new Uri(imagePath));
                             OnPropertyChanged("LoadedImage");
+
+                            GrayScaleFilter gsf = new GrayScaleFilter();
+                            filteredImage = gsf.Filterize(loadedImage);
+                            OnPropertyChanged("FilteredImage");
                         }
                     }));
             }
@@ -60,6 +64,7 @@ namespace KernelFilters
             bitmap.UriSource = source;
             bitmap.CacheOption = BitmapCacheOption.OnLoad;
             bitmap.EndInit();
+            MessageBox.Show("START" + bitmap.Height + " " + bitmap.Width);
             return bitmap;
         }
     }
