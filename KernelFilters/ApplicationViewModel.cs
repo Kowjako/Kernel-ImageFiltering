@@ -45,7 +45,7 @@ namespace KernelFilters
                             loadedImage = BitmapFromUri(new Uri(imagePath));
                             OnPropertyChanged("LoadedImage");
 
-                            BlackWhiteFilter gsf = new BlackWhiteFilter();
+                            SepiaFilter gsf = new SepiaFilter();
                             filteredImage = gsf.Filterize(loadedImage);
                             OnPropertyChanged("FilteredImage"); 
                         }

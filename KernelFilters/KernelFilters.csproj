@@ -71,6 +71,7 @@
     <Compile Include="FitersWithoutKernel\BlackWhiteFilter.cs" />
     <Compile Include="FitersWithoutKernel\GrayScaleFilter.cs" />
     <Compile Include="FitersWithoutKernel\NegativeFilter.cs" />
+    <Compile Include="FitersWithoutKernel\SepiaFilter.cs" />
     <Compile Include="IFilter.cs" />
     <Compile Include="RelayCommand.cs" />
     <Page Include="MainWindow.xaml">
