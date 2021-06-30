@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -22,9 +23,13 @@ namespace KernelFilters
         /* Commandy */
         private RelayCommand loadImageCommand;
         private RelayCommand saveImageCommand;
+        private RelayCommand changeFilterCommand;
+
+        private IFilter actualFilter;
         /* Properties for Binding*/
         public ImageSource LoadedImage => loadedImage;
         public ImageSource FilteredImage => filteredImage;
+
         
 
         public ApplicationViewModel(IDialogService service)
@@ -44,10 +49,6 @@ namespace KernelFilters
                             string imagePath = dialogService.FilePath;
                             loadedImage = BitmapFromUri(new Uri(imagePath));
                             OnPropertyChanged("LoadedImage");
-
-                            SepiaFilter gsf = new SepiaFilter();
-                            filteredImage = gsf.Filterize(loadedImage);
-                            OnPropertyChanged("FilteredImage"); 
                         }
                     }));
             }
@@ -72,6 +73,35 @@ namespace KernelFilters
                             }
                         }
                         
+                    }));
+            }
+        }
+
+        public RelayCommand ChangeFilterCommand
+        {
+            get
+            {
+                return changeFilterCommand ??
+                    (changeFilterCommand = new RelayCommand(obj =>
+                    {
+                        string filterName = obj as string;
+                        switch(filterName)
+                        {
+                            case "blackwhite":
+                                actualFilter = new BlackWhiteFilter();
+                                break;
+                            case "negative":
+                                actualFilter = new NegativeFilter();
+                                break;
+                            case "sepia":
+                                actualFilter = new SepiaFilter();
+                                break;
+                            case "grayscale":
+                                actualFilter = new GrayScaleFilter();
+                                break;
+                        }
+                        filteredImage = actualFilter.Filterize(loadedImage);
+                        OnPropertyChanged("FilteredImage");
                     }));
             }
         }

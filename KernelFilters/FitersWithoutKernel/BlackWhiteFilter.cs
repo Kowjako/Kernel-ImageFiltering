@@ -14,7 +14,7 @@ namespace KernelFilters.FitersWithoutKernel
 
         public ImageSource Filterize(ImageSource sourceImage)
         {
-            const int compareValue = 350;
+            const double compareValue = 255 / 0.8 / 2 * 3;
 
             startImageBMP = Converter.ImageSourceToBitmap(sourceImage);
             outputImageBMP = new Bitmap(startImageBMP.Width, startImageBMP.Height);
@@ -29,7 +29,7 @@ namespace KernelFilters.FitersWithoutKernel
                     float G = (pixel & 0x0000FF00) >> 8;
                     float B = (pixel & 0x000000FF);
 
-                    if (R + G + B > compareValue)
+                    if (R + G + B < compareValue)
                     {
                         R = G = B = 0;
                     }
