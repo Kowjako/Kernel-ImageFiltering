@@ -73,6 +73,10 @@
     <Compile Include="FitersWithoutKernel\NegativeFilter.cs" />
     <Compile Include="FitersWithoutKernel\SepiaFilter.cs" />
     <Compile Include="IFilter.cs" />
+    <Compile Include="INoise.cs" />
+    <Compile Include="Noises\GaussianNoise.cs" />
+    <Compile Include="Noises\SaltPepperNoise.cs" />
+    <Compile Include="Noises\SpackleNoise.cs" />
     <Compile Include="RelayCommand.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

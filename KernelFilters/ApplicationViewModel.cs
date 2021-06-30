@@ -1,4 +1,5 @@
 ﻿using KernelFilters.FitersWithoutKernel;
+using KernelFilters.Noises;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,14 +25,17 @@ namespace KernelFilters
         private RelayCommand loadImageCommand;
         private RelayCommand saveImageCommand;
         private RelayCommand changeFilterCommand;
+        private RelayCommand setNoiseCommand;
 
+        /* Aktualny filtr/szum */
         private IFilter actualFilter;
+        private INoise actualNoise;
+
         /* Properties for Binding*/
         public ImageSource LoadedImage => loadedImage;
         public ImageSource FilteredImage => filteredImage;
-
-        
-
+        public int NoiseScale { get; set; }
+       
         public ApplicationViewModel(IDialogService service)
         {
             this.dialogService = service;
@@ -101,6 +105,20 @@ namespace KernelFilters
                                 break;
                         }
                         filteredImage = actualFilter.Filterize(loadedImage);
+                        OnPropertyChanged("FilteredImage");
+                    }));
+            }
+        }
+
+        public RelayCommand SetNoiseCommand
+        {
+            get
+            {
+                return setNoiseCommand ??
+                    (setNoiseCommand = new RelayCommand(obj =>
+                    {
+                        actualNoise = new SaltPepperNoise(NoiseScale);
+                        filteredImage = actualNoise.Noising(loadedImage);
                         OnPropertyChanged("FilteredImage");
                     }));
             }
