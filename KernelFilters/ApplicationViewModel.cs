@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -19,6 +20,7 @@ namespace KernelFilters
         private ImageSource loadedImage, filteredImage;
         /* Commandy */
         private RelayCommand loadImageCommand;
+        private RelayCommand saveImageCommand;
         /* Properties for Binding*/
         public ImageSource LoadedImage => loadedImage;
         public ImageSource FilteredImage => filteredImage;
@@ -46,6 +48,29 @@ namespace KernelFilters
                             filteredImage = gsf.Filterize(loadedImage);
                             OnPropertyChanged("FilteredImage");
                         }
+                    }));
+            }
+        }
+
+        public RelayCommand SaveImageCommand
+        {
+            get
+            {
+                return saveImageCommand ??
+                    (saveImageCommand = new RelayCommand(obj =>
+                    {
+                        BitmapSource tmpImage = obj as BitmapSource;
+                        if(dialogService.SaveFileDialog() == true)
+                        {
+                            string imagePath = dialogService.FilePath;
+                            using (var fileStream = new FileStream(imagePath, FileMode.Create))
+                            {
+                                BitmapEncoder encoder = new PngBitmapEncoder();
+                                encoder.Frames.Add(BitmapFrame.Create(tmpImage as BitmapSource));
+                                encoder.Save(fileStream);
+                            }
+                        }
+                        
                     }));
             }
         }

@@ -86,7 +86,7 @@
                     <Border Margin="0,0,0,10" BorderBrush="Gray" BorderThickness="0.5">
                         <Image Stretch="Fill" Source="{Binding FilteredImage}" x:Name="outputImage" Width="570" Height="420"/>
                     </Border>
-                    <Button Background="White" BorderBrush="White" Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="Zapisz obrazek"/>
+                    <Button Command="{Binding SaveImageCommand}" CommandParameter="{Binding ElementName=outputImage, Path=Source}" Background="White" BorderBrush="White" Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="Zapisz obrazek"/>
                 </StackPanel>
             </GroupBox>
             <GroupBox FontFamily="Consolas" Header="Presety" Margin="5,5,5,10" Grid.Row="3" Grid.RowSpan="2" Grid.Column="1">
