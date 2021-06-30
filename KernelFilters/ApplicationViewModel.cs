@@ -117,8 +117,25 @@ namespace KernelFilters
                 return setNoiseCommand ??
                     (setNoiseCommand = new RelayCommand(obj =>
                     {
-                        actualNoise = new SaltPepperNoise(NoiseScale);
-                        filteredImage = actualNoise.Noising(loadedImage);
+                        string noiseName = null;
+                        UIElementCollection noiseFilters = (obj as StackPanel).Children; /* dostajemy co wlozone do kontenera StackPanel */
+                        foreach(var tmpNoise in noiseFilters)
+                        {
+                            RadioButton x = tmpNoise as RadioButton;    /* castujemy do RadioButton */
+                            if (x.IsChecked == true)
+                            {
+                                noiseName = x.Name;
+                                break;
+                            }
+                        }
+                        switch(noiseName)
+                        {
+                            case "saltpepper":
+                                actualNoise = new SaltPepperNoise(NoiseScale);
+                                break;
+                            
+                        }
+                        filteredImage = actualNoise?.Noising(loadedImage);
                         OnPropertyChanged("FilteredImage");
                     }));
             }

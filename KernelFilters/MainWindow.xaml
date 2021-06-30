@@ -67,17 +67,17 @@
                 </StackPanel>
             </GroupBox>
             <GroupBox Margin="5,5,5,5" Grid.Row="3" Grid.Column="0" x:Name="noiseBox" FontFamily="Consolas" Header="Szum">
-                <StackPanel>
-                    <RadioButton Margin="5,5,5,5" GroupName="noise" Content="Gausowski"/>
-                    <RadioButton Margin="5,5,5,5" GroupName="noise" Content="Sól i pieprz"/>
-                    <RadioButton Margin="5,5,5,5" GroupName="noise" Content="Plamkowy"/>
+                <StackPanel x:Name="noisePanel">
+                    <RadioButton x:Name="gaussian" Margin="5,5,5,5" GroupName="noise" Content="Gausowski"/>
+                    <RadioButton x:Name="saltpepper" Margin="5,5,5,5" GroupName="noise" Content="Sól i pieprz"/>
+                    <RadioButton x:Name="spackle" Margin="5,5,5,5" GroupName="noise" Content="Plamkowy"/>
                     <Slider  x:Name="noiseScale" Margin="5,10,5,5" Value="{Binding NoiseScale, Mode=TwoWay}" Minimum="0" Maximum="100" />
                 </StackPanel>
             </GroupBox>
             <GroupBox FontFamily="Consolas" Margin="5,5,5,10" Grid.Row="4" Grid.Column="0" x:Name="functionalBox" Header="Funkcjonalność">
                 <StackPanel>
                     <Button Background="White" BorderBrush="White" Foreground="Black" Margin="5,5,5,5" Content="Zastosuj macierz"/>
-                    <Button Command="{Binding SetNoiseCommand}" Background="White" BorderBrush="White" Foreground="Black" Margin="5,5,5,5" Content="Zastosuj szum"/>
+                    <Button Command="{Binding SetNoiseCommand}" CommandParameter="{Binding ElementName=noisePanel}" Background="White" BorderBrush="White" Foreground="Black" Margin="5,5,5,5" Content="Zastosuj szum"/>
                     <Button Background="White" BorderBrush="White" Foreground="Black" Margin="5,5,5,5" Content="Załaduj macierz z pliku"/>
                 </StackPanel>
             </GroupBox>

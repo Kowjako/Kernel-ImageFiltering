@@ -21,8 +21,6 @@ namespace KernelFilters.Noises
         public ImageSource Noising(ImageSource sourceImage)
         {
             Bitmap startImageBMP = null, outputImageBMP = null;
-
-
             startImageBMP = Converter.ImageSourceToBitmap(sourceImage);
             outputImageBMP = new Bitmap(startImageBMP.Width, startImageBMP.Height);
 
