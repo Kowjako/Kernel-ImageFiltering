@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace KernelFilters.KernelFilters
 {
-    class NormalizedBoxBlur : IFilter
+    public class NormalizedBoxBlur : IFilter
     {
         private int[,] kernel =
         {

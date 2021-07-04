@@ -68,12 +68,14 @@
     </ApplicationDefinition>
     <Compile Include="ApplicationViewModel.cs" />
     <Compile Include="Converter.cs" />
+    <Compile Include="Convoluter.cs" />
     <Compile Include="FitersWithoutKernel\BlackWhiteFilter.cs" />
     <Compile Include="FitersWithoutKernel\GrayScaleFilter.cs" />
     <Compile Include="FitersWithoutKernel\NegativeFilter.cs" />
     <Compile Include="FitersWithoutKernel\SepiaFilter.cs" />
     <Compile Include="IFilter.cs" />
     <Compile Include="INoise.cs" />
+    <Compile Include="KernelFilters\NormalizedBoxBlur.cs" />
     <Compile Include="Noises\GaussianNoise.cs" />
     <Compile Include="Noises\SaltPepperNoise.cs" />
     <Compile Include="Noises\SpackleNoise.cs" />
