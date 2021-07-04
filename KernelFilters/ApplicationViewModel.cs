@@ -127,6 +127,9 @@ namespace KernelFilters
                             case "gaussian3x3":
                                 actualFilter = new GaussianBlur3x3();
                                 break;
+                            case "sharpen":
+                                actualFilter = new Sharpen();
+                                break;
                         }
                         filteredImage = actualFilter.Filterize(loadedImage);
                         OnPropertyChanged("FilteredImage");
