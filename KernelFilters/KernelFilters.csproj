@@ -68,6 +68,7 @@
     </ApplicationDefinition>
     <Compile Include="ApplicationViewModel.cs" />
     <Compile Include="Converter.cs" />
+    <Compile Include="Convoluter.cs" />
     <Compile Include="FitersWithoutKernel\BlackWhiteFilter.cs" />
     <Compile Include="FitersWithoutKernel\GrayScaleFilter.cs" />
     <Compile Include="FitersWithoutKernel\NegativeFilter.cs" />
