@@ -7,13 +7,13 @@ using System.Windows.Media;
 
 namespace KernelFilters.MatrixFilter
 {
-    class EdgeDetection : IKernelFilter, IFilter
+    class GaussianBlur3x3 : IKernelFilter, IFilter
     {
         private float[,] kernel =
         {
-            {-1, -1, -1},
-            {-1,  8, -1},
-            {-1, -1, -1}
+            {1, 2, 1},
+            {2, 4, 2},
+            {1, 2, 1}
         };
 
         float[,] IKernelFilter.kernel
@@ -26,7 +26,7 @@ namespace KernelFilters.MatrixFilter
 
         public ImageSource Filterize(ImageSource sourceImage)
         {
-            MatrixConvoluator mc = new MatrixConvoluator(this, sourceImage, 3, 1);
+            MatrixConvoluator mc = new MatrixConvoluator(this, sourceImage, 3, 16);
             return mc.Convoluate();
         }
     }

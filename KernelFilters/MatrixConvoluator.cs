@@ -34,13 +34,13 @@ namespace KernelFilters
             int[,] kernelPixelsG = new int[kernelEdge, kernelEdge];
             int[,] kernelPixelsB = new int[kernelEdge, kernelEdge];
 
-            //int x = 0, y = 0;
-            //if (kernelEdge == 3) x = y = 1;
-            //if (kernelEdge == 5) x = y = 2;
+            int start = 0;
+            if (kernelEdge == 3) start = 1;
+            if (kernelEdge == 5) start = 2;
 
-            for (int x = 1; x < startImageBMP.Width - 1; x++)
+            for (int x = start; x < startImageBMP.Width - 1; x++)
             {
-                for (int y = 1; y < startImageBMP.Height - 1; y++)
+                for (int y = start; y < startImageBMP.Height - 1; y++)
                 {
                     for (int i = -1; i <= 1; i++)
                     {

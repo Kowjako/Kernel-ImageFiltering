@@ -77,6 +77,8 @@
     <Compile Include="IKernelFilter.cs" />
     <Compile Include="INoise.cs" />
     <Compile Include="MatrixConvoluator.cs" />
+    <Compile Include="MatrixFilter\EdgeDetection.cs" />
+    <Compile Include="MatrixFilter\GaussianBlur3x3.cs" />
     <Compile Include="MatrixFilter\NormalizedBoxBlur.cs" />
     <Compile Include="Noises\GaussianNoise.cs" />
     <Compile Include="Noises\SaltPepperNoise.cs" />

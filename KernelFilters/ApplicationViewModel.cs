@@ -121,6 +121,12 @@ namespace KernelFilters
                             case "boxblur":
                                 actualFilter = new NormalizedBoxBlur();
                                 break;
+                            case "edgedetection":
+                                actualFilter = new EdgeDetection();
+                                break;
+                            case "gaussian3x3":
+                                actualFilter = new GaussianBlur3x3();
+                                break;
                         }
                         filteredImage = actualFilter.Filterize(loadedImage);
                         OnPropertyChanged("FilteredImage");
