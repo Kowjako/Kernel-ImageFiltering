@@ -130,6 +130,12 @@ namespace KernelFilters
                             case "sharpen":
                                 actualFilter = new Sharpen();
                                 break;
+                            case "sobel":
+                                actualFilter = new SobelFilter();
+                                break;
+                            case "embossing":
+                                actualFilter = new Emboss();
+                                break;
                         }
                         filteredImage = actualFilter.Filterize(loadedImage);
                         OnPropertyChanged("FilteredImage");
