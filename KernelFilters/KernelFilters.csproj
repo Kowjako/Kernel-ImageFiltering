@@ -47,6 +47,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -65,6 +66,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ApplicationViewModel.cs" />
+    <Compile Include="Converter.cs" />
+    <Compile Include="Convoluter.cs" />
+    <Compile Include="FitersWithoutKernel\BlackWhiteFilter.cs" />
+    <Compile Include="FitersWithoutKernel\GrayScaleFilter.cs" />
+    <Compile Include="FitersWithoutKernel\NegativeFilter.cs" />
+    <Compile Include="FitersWithoutKernel\SepiaFilter.cs" />
+    <Compile Include="IFilter.cs" />
+    <Compile Include="INoise.cs" />
+    <Compile Include="NormalizedBoxBlur.cs" />
+    <Compile Include="Noises\GaussianNoise.cs" />
+    <Compile Include="Noises\SaltPepperNoise.cs" />
+    <Compile Include="Noises\SpackleNoise.cs" />
+    <Compile Include="RelayCommand.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -73,6 +88,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DefaultDialogService.cs" />
+    <Compile Include="IDialogService.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

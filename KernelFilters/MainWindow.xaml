@@ -36,10 +36,10 @@
             <Image x:Name="closeBtn" MouseUp="closeBtn_MouseUp" Margin="0,5,5,5" Grid.Column="1" HorizontalAlignment="Right" Source="Icons/exit.png" Cursor="Hand"/>
             <GroupBox Header="Obraz wejściowy" FontFamily="Consolas" Margin="5,5,5,5" Grid.Row="1" Grid.Column="0">
                 <StackPanel>
-                    <Border BorderBrush="Gray" BorderThickness="0.5" Margin="0,0,0,10">
-                        <Image Margin="0,0,0,10" x:Name="loadedImage" Width="250" Height="150"/>
+                    <Border HorizontalAlignment="Center" BorderBrush="Gray" BorderThickness="0.5" Margin="0,0,0,10">
+                        <Image Source="{Binding LoadedImage}" Margin="3,3,3,3" Stretch="Fill" x:Name="loadedImage" Width="264" Height="153"/>
                     </Border>
-                    <Button Background="White" BorderBrush="White" Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="Załaduj obrazek" />
+                    <Button Command="{Binding LoadImageCommand}" Background="White" BorderBrush="White" Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="Załaduj obrazek" />
                 </StackPanel>
             </GroupBox>
             <GroupBox x:Name="matrixBox" Header="Macierz" FontFamily="Consolas" Margin="5,5,5,5" Grid.Row="2" Grid.Column="0">
@@ -67,30 +67,50 @@
                 </StackPanel>
             </GroupBox>
             <GroupBox Margin="5,5,5,5" Grid.Row="3" Grid.Column="0" x:Name="noiseBox" FontFamily="Consolas" Header="Szum">
-                <StackPanel>
-                    <RadioButton Margin="5,5,5,5" GroupName="noise" Content="Gausowski"/>
-                    <RadioButton Margin="5,5,5,5" GroupName="noise" Content="Sól i pieprz"/>
-                    <RadioButton Margin="5,5,5,5" GroupName="noise" Content="Plamkowy"/>
-                    <Slider x:Name="noiseScale" Margin="5,10,5,5" Value="0" Minimum="0" Maximum="100" />
+                <StackPanel x:Name="noisePanel">
+                    <RadioButton x:Name="gaussian" Margin="5,5,5,5" GroupName="noise" Content="Gausowski"/>
+                    <RadioButton x:Name="saltpepper" Margin="5,5,5,5" GroupName="noise" Content="Sól i pieprz"/>
+                    <RadioButton x:Name="spackle" Margin="5,5,5,5" GroupName="noise" Content="Plamkowy"/>
+                    <Slider  x:Name="noiseScale" Margin="5,10,5,5" Value="{Binding NoiseScale, Mode=TwoWay}" Minimum="0" Maximum="100" />
                 </StackPanel>
             </GroupBox>
             <GroupBox FontFamily="Consolas" Margin="5,5,5,10" Grid.Row="4" Grid.Column="0" x:Name="functionalBox" Header="Funkcjonalność">
                 <StackPanel>
                     <Button Background="White" BorderBrush="White" Foreground="Black" Margin="5,5,5,5" Content="Zastosuj macierz"/>
-                    <Button Background="White" BorderBrush="White" Foreground="Black" Margin="5,5,5,5" Content="Zastosuj szum"/>
+                    <Button Command="{Binding SetNoiseCommand}" CommandParameter="{Binding ElementName=noisePanel}" Background="White" BorderBrush="White" Foreground="Black" Margin="5,5,5,5" Content="Zastosuj szum"/>
                     <Button Background="White" BorderBrush="White" Foreground="Black" Margin="5,5,5,5" Content="Załaduj macierz z pliku"/>
                 </StackPanel>
             </GroupBox>
             <GroupBox FontFamily="Consolas" Header="Obraz wyjściowy" Margin="5,5,5,5" Grid.Row ="1" Grid.RowSpan="2" Grid.Column="1">
                 <StackPanel>
-                    <Border Margin="0,0,0,10" BorderBrush="Gray" BorderThickness="0.5">
-                        <Image x:Name="outputImage" Width="570" Height="420"/>
+                    <Border HorizontalAlignment="Center" Margin="0,0,0,10" BorderBrush="Gray" BorderThickness="0.5">
+                        <Image Margin="5" Stretch="Fill" Source="{Binding FilteredImage}" x:Name="outputImage" Width="550" Height="410"/>
                     </Border>
-                    <Button Background="White" BorderBrush="White" Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="Zapisz obrazek"/>
+                    <Button Command="{Binding SaveImageCommand}" CommandParameter="{Binding ElementName=outputImage, Path=Source}" Background="White" BorderBrush="White" Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="Zapisz obrazek"/>
                 </StackPanel>
             </GroupBox>
             <GroupBox FontFamily="Consolas" Header="Presety" Margin="5,5,5,10" Grid.Row="3" Grid.RowSpan="2" Grid.Column="1">
-                
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="grayscale" Grid.Row="0" Grid.Column="0" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="GrayScale" />
+                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="negative" Grid.Row="0" Grid.Column="1" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Negative" />
+                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="blackwhite" Grid.Row="0" Grid.Column="2" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Black-White" />
+                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="sepia" Grid.Row="0" Grid.Column="3" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Sepia" />
+                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="boxblur" Grid.Row="0" Grid.Column="4" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Box Blur" />
+                </Grid>
             </GroupBox>
         </Grid>
     </Border>

@@ -23,6 +23,7 @@ namespace KernelFilters
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new ApplicationViewModel(new DefaultDialogService());
         }
 
         private void closeBtn_MouseUp(object sender, MouseButtonEventArgs e)
