@@ -1,4 +1,5 @@
 ﻿using KernelFilters.FitersWithoutKernel;
+using KernelFilters.MatrixFilter;
 using KernelFilters.Noises;
 using System;
 using System.Collections.Generic;
@@ -102,6 +103,9 @@ namespace KernelFilters
                                 break;
                             case "grayscale":
                                 actualFilter = new GrayScaleFilter();
+                                break;
+                            case "boxblur":
+                                actualFilter = new NormalizedBoxBlur();
                                 break;
                         }
                         filteredImage = actualFilter.Filterize(loadedImage);

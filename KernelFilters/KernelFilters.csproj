@@ -75,6 +75,7 @@
     <Compile Include="FitersWithoutKernel\SepiaFilter.cs" />
     <Compile Include="IFilter.cs" />
     <Compile Include="INoise.cs" />
+    <Compile Include="MatrixFilter\NormalizedBoxBlur.cs" />
     <Compile Include="Noises\GaussianNoise.cs" />
     <Compile Include="Noises\SaltPepperNoise.cs" />
     <Compile Include="Noises\SpackleNoise.cs" />
