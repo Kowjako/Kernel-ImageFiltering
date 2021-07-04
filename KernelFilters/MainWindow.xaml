@@ -62,7 +62,7 @@
                     </Grid>
                     <StackPanel Margin="15,15,5,5" Orientation="Horizontal">
                         <TextBlock Height="15" Text="Mnożnik"/>
-                        <TextBox Margin="15,-1,0,3" TextAlignment="Center" Text="1" Width="30"/>
+                        <TextBox Margin="15,-1,0,3" TextAlignment="Center" Text="{Binding KernelScale, Mode=TwoWay}" Width="30"/>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
@@ -76,7 +76,7 @@
             </GroupBox>
             <GroupBox FontFamily="Consolas" Margin="5,5,5,10" Grid.Row="4" Grid.Column="0" x:Name="functionalBox" Header="Funkcjonalność">
                 <StackPanel>
-                    <Button Background="White" BorderBrush="White" Foreground="Black" Margin="5,5,5,5" Content="Zastosuj macierz"/>
+                    <Button Command="{Binding AcceptMatrixCommand}" Background="White" BorderBrush="White" Foreground="Black" Margin="5,5,5,5" Content="Zastosuj macierz"/>
                     <Button Command="{Binding SetNoiseCommand}" CommandParameter="{Binding ElementName=noisePanel}" Background="White" BorderBrush="White" Foreground="Black" Margin="5,5,5,5" Content="Zastosuj szum"/>
                     <Button Background="White" BorderBrush="White" Foreground="Black" Margin="5,5,5,5" Content="Załaduj macierz z pliku"/>
                 </StackPanel>

@@ -27,6 +27,7 @@ namespace KernelFilters
         private RelayCommand saveImageCommand;
         private RelayCommand changeFilterCommand;
         private RelayCommand setNoiseCommand;
+        private RelayCommand acceptMatrixCommand;
 
         /* Aktualny filtr/szum */
         private IFilter actualFilter;
@@ -36,10 +37,23 @@ namespace KernelFilters
         public ImageSource LoadedImage => loadedImage;
         public ImageSource FilteredImage => filteredImage;
         public int NoiseScale { get; set; }
+        public int KernelScale { get; set; }
        
         public ApplicationViewModel(IDialogService service)
         {
             this.dialogService = service;
+        }
+
+        public RelayCommand AcceptMatrixCommand
+        {
+            get
+            {
+                return acceptMatrixCommand ??
+                    (acceptMatrixCommand = new RelayCommand(obj =>
+                    {
+                        MessageBox.Show(KernelScale.ToString());
+                    }));
+            }
         }
 
         public RelayCommand LoadImageCommand

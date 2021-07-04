@@ -57,9 +57,9 @@ namespace KernelFilters.MatrixFilter
                     //}
 
                     //MessageBox.Show(Convoluter.Convolute(kernelPixels, kernel).ToString());
-                    int resultPixelR = (int)Convoluter.Convolute(kernelPixelsR, kernel, 1.0f/9);
-                    int resultPixelG = (int)Convoluter.Convolute(kernelPixelsG, kernel, 1.0f / 9);
-                    int resultPixelB = (int)Convoluter.Convolute(kernelPixelsB, kernel, 1.0f / 9);
+                    int resultPixelR = (int)Convoluter.Convolute(kernelPixelsR, kernel, 3, 1.0f/9);
+                    int resultPixelG = (int)Convoluter.Convolute(kernelPixelsG, kernel, 3, 1.0f / 9);
+                    int resultPixelB = (int)Convoluter.Convolute(kernelPixelsB, kernel, 3, 1.0f / 9);
 
                     //MessageBox.Show(resultPixel.ToString());
 
