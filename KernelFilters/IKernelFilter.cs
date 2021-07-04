@@ -8,6 +8,6 @@ namespace KernelFilters
 {
     interface IKernelFilter
     {
-        float[,] kernel { get; set; }
+        float[,] kernel { get; }
     }
 }

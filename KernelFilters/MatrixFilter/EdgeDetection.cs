@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Windows;
-using System.Windows.Media;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace KernelFilters.MatrixFilter
 {
-    class NormalizedBoxBlur : IKernelFilter, IFilter
+    class EdgeDetection : IKernelFilter, IFilter
     {
         private float[,] kernel =
         {
-            {1, 1, 1},
-            {1, 1, 1},
-            {1, 1, 1}
+            {-1, -1, -1},
+            {-1,  8, -1},
+            {-1, -1, -1}
         };
 
         float[,] IKernelFilter.kernel
@@ -25,7 +25,7 @@ namespace KernelFilters.MatrixFilter
 
         public ImageSource Filterize(ImageSource sourceImage)
         {
-            MatrixConvoluator mc = new MatrixConvoluator(this, sourceImage, 3, 9);
+            MatrixConvoluator mc = new MatrixConvoluator(this, sourceImage, 3, 1);
             return mc.Convoluate();
         }
     }
