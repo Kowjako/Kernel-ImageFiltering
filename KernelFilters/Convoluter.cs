@@ -8,7 +8,7 @@ namespace KernelFilters
 {
     static class Convoluter
     {
-        public static float Convolute(int[,] image, int[,] kernel, float scale = 1)
+        static float Convolute(int[,] image, int[,] kernel, float scale = 1)
         {
             int result = 0;
             for(int i=0;i<image.Length;i++)
@@ -18,7 +18,7 @@ namespace KernelFilters
                     result += image[i, j] * kernel[i, j];
                 }
             }
-            return result * scale;
+            return scale * result;
         }
     }
 }

@@ -109,7 +109,6 @@
                     <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="negative" Grid.Row="0" Grid.Column="1" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Negative" />
                     <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="blackwhite" Grid.Row="0" Grid.Column="2" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Black-White" />
                     <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="sepia" Grid.Row="0" Grid.Column="3" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Sepia" />
-                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="boxblur" Grid.Row="0" Grid.Column="4" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Box Blur" />
                 </Grid>
             </GroupBox>
         </Grid>
