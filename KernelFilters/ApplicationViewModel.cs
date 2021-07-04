@@ -128,10 +128,19 @@ namespace KernelFilters
                                 break;
                             }
                         }
+
                         switch(noiseName)
                         {
                             case "saltpepper":
                                 actualNoise = new SaltPepperNoise(NoiseScale);
+                                break;
+
+                            case "gaussian":
+                                actualNoise = new GaussianNoise(NoiseScale);
+                                break;
+
+                            case "spackle":
+                                actualNoise = new SpackleNoise(NoiseScale);
                                 break;
                             
                         }
