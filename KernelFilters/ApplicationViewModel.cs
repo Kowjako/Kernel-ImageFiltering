@@ -136,6 +136,15 @@ namespace KernelFilters
                             case "embossing":
                                 actualFilter = new Emboss();
                                 break;
+                            case "extension":
+                                actualFilter = new ExtensionFilter();
+                                break;
+                            case "prewett":
+                                actualFilter = new Prewitt();
+                                break;
+                            case "erosion":
+                                actualFilter = new Erosion();
+                                break;
                         }
                         filteredImage = actualFilter.Filterize(loadedImage);
                         OnPropertyChanged("FilteredImage");

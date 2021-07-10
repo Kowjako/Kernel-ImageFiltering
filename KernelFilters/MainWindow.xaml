@@ -119,6 +119,11 @@
                     <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="sharpen" Grid.Row="1" Grid.Column="2" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Sharpen" />
                     <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="sobel" Grid.Row="1" Grid.Column="3" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Sobel filter" />
                     <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="embossing" Grid.Row="1" Grid.Column="4" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Embossing" />
+                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="extension" Grid.Row="2" Grid.Column="0" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Extension" />
+                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="prewett" Grid.Row="2" Grid.Column="1" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}">
+                        <TextBlock TextAlignment="Center" HorizontalAlignment="Center" Text="Prewitt filter" TextWrapping="Wrap"/>
+                    </Button>
+                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="erosion" Grid.Row="2" Grid.Column="2" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Erosion" />
                 </Grid>
             </GroupBox>
         </Grid>

@@ -79,8 +79,11 @@
     <Compile Include="MatrixConvoluator.cs" />
     <Compile Include="MatrixFilter\EdgeDetection.cs" />
     <Compile Include="MatrixFilter\Emboss.cs" />
+    <Compile Include="MatrixFilter\Erosion.cs" />
+    <Compile Include="MatrixFilter\ExtensionFilter.cs" />
     <Compile Include="MatrixFilter\GaussianBlur3x3.cs" />
     <Compile Include="MatrixFilter\NormalizedBoxBlur.cs" />
+    <Compile Include="MatrixFilter\Prewitt.cs" />
     <Compile Include="MatrixFilter\Sharpen.cs" />
     <Compile Include="MatrixFilter\SobelFilter.cs" />
     <Compile Include="Noises\GaussianNoise.cs" />
