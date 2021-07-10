@@ -30,25 +30,34 @@ namespace KernelFilters
             startImageBMP = Converter.ImageSourceToBitmap(image);
             outputImageBMP = new Bitmap(startImageBMP.Width, startImageBMP.Height);
 
-            int[,] kernelPixelsR = new int[kernelEdge, kernelEdge];
+            int[,] kernelPixelsR = new int[kernelEdge, kernelEdge];  //tworzenie macierz ZxZ
             int[,] kernelPixelsG = new int[kernelEdge, kernelEdge];
             int[,] kernelPixelsB = new int[kernelEdge, kernelEdge];
 
             int start = 0;
-            if (kernelEdge == 3) start = 1;
-            if (kernelEdge == 5) start = 2;
-
-            for (int x = start; x < startImageBMP.Width - 1; x++)
+            int kernelstart = 0;
+            if (kernelEdge == 3)
             {
-                for (int y = start; y < startImageBMP.Height - 1; y++)
+                start = 1;
+                kernelstart = 1;
+            }
+            if (kernelEdge == 5)
+            {
+                start = 2;
+                kernelstart = 2;
+            }
+
+            for (int x = start; x < startImageBMP.Width - kernelstart; x++)
+            {
+                for (int y = start; y < startImageBMP.Height - kernelstart; y++)
                 {
-                    for (int i = -1; i <= 1; i++)
+                    for (int i = -kernelstart; i <= kernelstart; i++)
                     {
-                        for (int j = -1; j <= 1; j++)
+                        for (int j = -kernelstart; j <= kernelstart; j++)
                         {
-                            kernelPixelsR[i + 1, j + 1] = startImageBMP.GetPixel(x + j, y + i).R;
-                            kernelPixelsG[i + 1, j + 1] = startImageBMP.GetPixel(x + j, y + i).G;
-                            kernelPixelsB[i + 1, j + 1] = startImageBMP.GetPixel(x + j, y + i).B;
+                            kernelPixelsR[i + kernelstart, j + kernelstart] = startImageBMP.GetPixel(x + j, y + i).R;
+                            kernelPixelsG[i + kernelstart, j + kernelstart] = startImageBMP.GetPixel(x + j, y + i).G;
+                            kernelPixelsB[i + kernelstart, j + kernelstart] = startImageBMP.GetPixel(x + j, y + i).B;
                         }
                     }
 

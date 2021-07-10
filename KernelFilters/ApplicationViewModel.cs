@@ -142,8 +142,8 @@ namespace KernelFilters
                             case "prewett":
                                 actualFilter = new Prewitt();
                                 break;
-                            case "erosion":
-                                actualFilter = new Erosion();
+                            case "gaussian5x5":
+                                actualFilter = new GaussianBlur5x5();
                                 break;
                         }
                         filteredImage = actualFilter.Filterize(loadedImage);
