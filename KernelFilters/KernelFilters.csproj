@@ -89,6 +89,7 @@
     <Compile Include="Noises\GaussianNoise.cs" />
     <Compile Include="Noises\SaltPepperNoise.cs" />
     <Compile Include="Noises\SpackleNoise.cs" />
+    <Compile Include="NonLinearFilters\Median5Filter.cs" />
     <Compile Include="RelayCommand.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

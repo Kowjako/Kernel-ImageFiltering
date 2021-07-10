@@ -1,6 +1,7 @@
 ﻿using KernelFilters.FitersWithoutKernel;
 using KernelFilters.MatrixFilter;
 using KernelFilters.Noises;
+using KernelFilters.NonLinearFilters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -144,6 +145,9 @@ namespace KernelFilters
                                 break;
                             case "gaussian5x5":
                                 actualFilter = new GaussianBlur5x5();
+                                break;
+                            case "median":
+                                actualFilter = new Median5Filter();
                                 break;
                         }
                         filteredImage = actualFilter.Filterize(loadedImage);
