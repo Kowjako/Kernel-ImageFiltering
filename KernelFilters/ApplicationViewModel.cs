@@ -168,12 +168,14 @@ namespace KernelFilters
                         foreach(var tmpNoise in noiseFilters)
                         {
                             RadioButton x = tmpNoise as RadioButton;    /* castujemy do RadioButton */
-                            if (x.IsChecked == true)
+                            if (x!=null && x.IsChecked == true)
                             {
                                 noiseName = x.Name;
                                 break;
                             }
                         }
+
+                        if (noiseName == null) return;
 
                         switch(noiseName)
                         {

@@ -32,8 +32,8 @@
                 <Border DockPanel.Dock="Bottom" BorderBrush="Gray" BorderThickness="1"/>
                 <StackPanel x:Name="headerPanel" MouseLeftButtonDown="headerPanel_MouseLeftButtonDown" Background="Transparent"/>
             </DockPanel>
-            <TextBlock Style="{StaticResource textBlockStyle}" HorizontalAlignment="Left" Margin="10,0,0,0" Height="17" Width="230" Text="Kernel - Convolute Filters"/>
-            <Image x:Name="closeBtn" MouseUp="closeBtn_MouseUp" Margin="0,5,5,5" Grid.Column="1" HorizontalAlignment="Right" Source="Icons/exit.png" Cursor="Hand"/>
+            <TextBlock Style="{StaticResource textBlockStyle}" FontFamily="Copperplate Gothic" HorizontalAlignment="Left" Margin="10,13,0,13" Height="17" Width="239" Text="Kernel - Convolute Filters"/>
+            <Image x:Name="closeBtn" MouseUp="closeBtn_MouseUp" Margin="0,7,5,7" Grid.Column="1" HorizontalAlignment="Right" Source="Icons/exit.png" Cursor="Hand"/>
             <GroupBox Header="Obraz wejściowy" FontFamily="Consolas" Margin="5,5,5,5" Grid.Row="1" Grid.Column="0">
                 <StackPanel>
                     <Border HorizontalAlignment="Center" BorderBrush="Gray" BorderThickness="0.5" Margin="0,0,0,10">
@@ -68,9 +68,9 @@
             </GroupBox>
             <GroupBox Margin="5,5,5,5" Grid.Row="3" Grid.Column="0" x:Name="noiseBox" FontFamily="Consolas" Header="Szum">
                 <StackPanel x:Name="noisePanel">
-                    <RadioButton x:Name="gaussian" Margin="5,5,5,5" GroupName="noise" Content="Gausowski"/>
-                    <RadioButton x:Name="saltpepper" Margin="5,5,5,5" GroupName="noise" Content="Sól i pieprz"/>
-                    <RadioButton x:Name="spackle" Margin="5,5,5,5" GroupName="noise" Content="Plamkowy"/>
+                    <RadioButton IsThreeState="False" x:Name="gaussian" Margin="5,5,5,5" GroupName="noise" Content="Gausowski"/>
+                    <RadioButton IsThreeState="False" x:Name="saltpepper" Margin="5,5,5,5" GroupName="noise" Content="Sól i pieprz"/>
+                    <RadioButton IsThreeState="False" x:Name="spackle" Margin="5,5,5,5" GroupName="noise" Content="Plamkowy"/>
                     <Slider  x:Name="noiseScale" Margin="5,10,5,5" Value="{Binding NoiseScale, Mode=TwoWay}" Minimum="0" Maximum="100" />
                 </StackPanel>
             </GroupBox>
@@ -129,6 +129,7 @@
                     <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="median" Grid.Row="2" Grid.Column="3" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}">
                         <TextBlock TextAlignment="Center" HorizontalAlignment="Center" Text="Median 5px filter" TextWrapping="Wrap"/>
                     </Button>
+                    
                 </Grid>
             </GroupBox>
         </Grid>
