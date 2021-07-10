@@ -61,9 +61,9 @@ namespace KernelFilters
                         }
                     }
 
-                    int resultPixelR = (int)Convoluter.Convolute(kernelPixelsR, kernel, kernelEdge, 1.0f / kernelScale);
-                    int resultPixelG = (int)Convoluter.Convolute(kernelPixelsG, kernel, kernelEdge, 1.0f / kernelScale);
-                    int resultPixelB = (int)Convoluter.Convolute(kernelPixelsB, kernel, kernelEdge, 1.0f / kernelScale);
+                   int resultPixelR = (int)Convoluter.Convolute(kernelPixelsR, kernel, kernelEdge, 1.0f / kernelScale);
+                   int resultPixelG = (int)Convoluter.Convolute(kernelPixelsG, kernel, kernelEdge, 1.0f / kernelScale);
+                   int resultPixelB = (int)Convoluter.Convolute(kernelPixelsB, kernel, kernelEdge, 1.0f / kernelScale);
 
                     if (resultPixelR < 0) resultPixelR = 0;
                     else if (resultPixelR > 255) resultPixelR = 255;

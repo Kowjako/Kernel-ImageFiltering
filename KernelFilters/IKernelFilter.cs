@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace KernelFilters
 {
-    interface IKernelFilter
+    interface IKernelFilter : IFilter
     {
         float[,] kernel { get; }
+        int kernelEdge { get; }
     }
 }

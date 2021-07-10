@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 namespace KernelFilters.MatrixFilter
 {
-    class GaussianBlur5x5 : IFilter, IKernelFilter
+    class GaussianBlur5x5 : IKernelFilter
     {
         private float[,] kernel =
         {
@@ -17,6 +17,8 @@ namespace KernelFilters.MatrixFilter
             {4, 9, 12, 9, 4},
             {2, 4, 5, 4, 2}
         };
+
+        public int kernelEdge => 5;
 
         float[,] IKernelFilter.kernel
         {

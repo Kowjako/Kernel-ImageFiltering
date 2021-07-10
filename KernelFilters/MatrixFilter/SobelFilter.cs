@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 namespace KernelFilters.MatrixFilter
 {
-    class SobelFilter : IFilter, IKernelFilter
+    class SobelFilter : IKernelFilter
     {
         private float[,] kernel =
         {
@@ -15,6 +15,8 @@ namespace KernelFilters.MatrixFilter
             {0, 0, 0},
             {-1, -2, -1}
         };
+
+        public int kernelEdge => 3;
 
         float[,] IKernelFilter.kernel
         {

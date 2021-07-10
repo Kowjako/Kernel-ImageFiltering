@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 namespace KernelFilters.MatrixFilter
 {
-    class Sharpen : IKernelFilter, IFilter
+    class Sharpen : IKernelFilter
     {
         private float[,] kernel =
         {
@@ -15,6 +15,8 @@ namespace KernelFilters.MatrixFilter
             {-1, 5, -1},
             {0, -1, 0}
         };
+
+        public int kernelEdge => 3;
 
         float[,] IKernelFilter.kernel
         {

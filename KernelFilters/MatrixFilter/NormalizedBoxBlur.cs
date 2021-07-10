@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace KernelFilters.MatrixFilter
 {
-    class NormalizedBoxBlur : IKernelFilter, IFilter
+    class NormalizedBoxBlur : IKernelFilter
     {
         private float[,] kernel =
         {
@@ -14,6 +14,8 @@ namespace KernelFilters.MatrixFilter
             {1, 1, 1},
             {1, 1, 1}
         };
+
+        public int kernelEdge => 3;
 
         float[,] IKernelFilter.kernel
         {
