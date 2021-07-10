@@ -45,6 +45,7 @@
       <HintPath>..\packages\MaterialDesignThemes.4.1.0\lib\net452\MaterialDesignThemes.Wpf.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -89,6 +90,7 @@
     <Compile Include="Noises\GaussianNoise.cs" />
     <Compile Include="Noises\SaltPepperNoise.cs" />
     <Compile Include="Noises\SpackleNoise.cs" />
+    <Compile Include="NonLinearFilters\ChannelSegregation.cs" />
     <Compile Include="NonLinearFilters\Median5Filter.cs" />
     <Compile Include="RelayCommand.cs" />
     <Page Include="MainWindow.xaml">

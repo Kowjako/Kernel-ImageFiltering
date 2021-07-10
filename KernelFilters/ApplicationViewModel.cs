@@ -149,6 +149,10 @@ namespace KernelFilters
                             case "median":
                                 actualFilter = new Median5Filter();
                                 break;
+                            case "segregation":
+                                var x = Microsoft.VisualBasic.Interaction.InputBox("Choose channel for segregtion 0 - R, 1 - G, 2 - B", "Segregation Filter", null);
+                                actualFilter = new ChannelSegregation(Int32.Parse(x));
+                                break;
                         }
                         filteredImage = actualFilter.Filterize(loadedImage);
                         OnPropertyChanged("FilteredImage");
