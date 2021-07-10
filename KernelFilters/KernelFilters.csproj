@@ -92,6 +92,7 @@
     <Compile Include="Noises\SpackleNoise.cs" />
     <Compile Include="NonLinearFilters\ChannelSegregation.cs" />
     <Compile Include="NonLinearFilters\Median5Filter.cs" />
+    <Compile Include="NonLinearFilters\MirrorFilter.cs" />
     <Compile Include="RelayCommand.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

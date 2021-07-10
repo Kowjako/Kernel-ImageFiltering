@@ -132,6 +132,7 @@
                     <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="segregation" Grid.Row="2" Grid.Column="4" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}">
                         <TextBlock TextAlignment="Center" HorizontalAlignment="Center" Text="Channel segregation" TextWrapping="Wrap"/>
                     </Button>
+                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="mirror" Grid.Row="3" Grid.Column="0" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Mirror" />
                 </Grid>
             </GroupBox>
         </Grid>

@@ -153,6 +153,9 @@ namespace KernelFilters
                                 var x = Microsoft.VisualBasic.Interaction.InputBox("Choose channel for segregtion 0 - R, 1 - G, 2 - B", "Segregation Filter", null);
                                 actualFilter = new ChannelSegregation(Int32.Parse(x));
                                 break;
+                            case "mirror":
+                                actualFilter = new MirrorFilter();
+                                break;
                         }
                         filteredImage = actualFilter.Filterize(loadedImage);
                         OnPropertyChanged("FilteredImage");
