@@ -1,21 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Windows;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Media;
 
 namespace KernelFilters.MatrixFilter
 {
-    class NormalizedBoxBlur : IKernelFilter
+    class GaussianBlur5x5 : IKernelFilter
     {
         private float[,] kernel =
         {
-            {1, 1, 1},
-            {1, 1, 1},
-            {1, 1, 1}
+            {2, 4, 5, 4, 2},
+            {4, 9, 12, 9, 4},
+            {5, 12, 15, 12, 5},
+            {4, 9, 12, 9, 4},
+            {2, 4, 5, 4, 2}
         };
 
-        public int kernelEdge => 3;
+        public int kernelEdge => 5;
 
         float[,] IKernelFilter.kernel
         {
@@ -27,7 +30,7 @@ namespace KernelFilters.MatrixFilter
 
         public ImageSource Filterize(ImageSource sourceImage)
         {
-            MatrixConvoluator mc = new MatrixConvoluator(this, sourceImage, 3, 9);
+            MatrixConvoluator mc = new MatrixConvoluator(this, sourceImage, 5, 159);
             return mc.Convoluate();
         }
     }

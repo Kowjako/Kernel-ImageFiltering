@@ -32,8 +32,8 @@
                 <Border DockPanel.Dock="Bottom" BorderBrush="Gray" BorderThickness="1"/>
                 <StackPanel x:Name="headerPanel" MouseLeftButtonDown="headerPanel_MouseLeftButtonDown" Background="Transparent"/>
             </DockPanel>
-            <TextBlock Style="{StaticResource textBlockStyle}" HorizontalAlignment="Left" Margin="10,0,0,0" Height="17" Width="230" Text="Kernel - Convolute Filters"/>
-            <Image x:Name="closeBtn" MouseUp="closeBtn_MouseUp" Margin="0,5,5,5" Grid.Column="1" HorizontalAlignment="Right" Source="Icons/exit.png" Cursor="Hand"/>
+            <TextBlock Style="{StaticResource textBlockStyle}" FontFamily="Copperplate Gothic" HorizontalAlignment="Left" Margin="10,13,0,13" Height="17" Width="239" Text="Kernel - Convolute Filters"/>
+            <Image x:Name="closeBtn" MouseUp="closeBtn_MouseUp" Margin="0,7,5,7" Grid.Column="1" HorizontalAlignment="Right" Source="Icons/exit.png" Cursor="Hand"/>
             <GroupBox Header="Obraz wejściowy" FontFamily="Consolas" Margin="5,5,5,5" Grid.Row="1" Grid.Column="0">
                 <StackPanel>
                     <Border HorizontalAlignment="Center" BorderBrush="Gray" BorderThickness="0.5" Margin="0,0,0,10">
@@ -62,21 +62,21 @@
                     </Grid>
                     <StackPanel Margin="15,15,5,5" Orientation="Horizontal">
                         <TextBlock Height="15" Text="Mnożnik"/>
-                        <TextBox Margin="15,-1,0,3" TextAlignment="Center" Text="1" Width="30"/>
+                        <TextBox Margin="15,-1,0,3" TextAlignment="Center" Text="{Binding KernelScale, Mode=TwoWay}" Width="30"/>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
             <GroupBox Margin="5,5,5,5" Grid.Row="3" Grid.Column="0" x:Name="noiseBox" FontFamily="Consolas" Header="Szum">
                 <StackPanel x:Name="noisePanel">
-                    <RadioButton x:Name="gaussian" Margin="5,5,5,5" GroupName="noise" Content="Gausowski"/>
-                    <RadioButton x:Name="saltpepper" Margin="5,5,5,5" GroupName="noise" Content="Sól i pieprz"/>
-                    <RadioButton x:Name="spackle" Margin="5,5,5,5" GroupName="noise" Content="Plamkowy"/>
+                    <RadioButton IsThreeState="False" x:Name="gaussian" Margin="5,5,5,5" GroupName="noise" Content="Gausowski"/>
+                    <RadioButton IsThreeState="False" x:Name="saltpepper" Margin="5,5,5,5" GroupName="noise" Content="Sól i pieprz"/>
+                    <RadioButton IsThreeState="False" x:Name="spackle" Margin="5,5,5,5" GroupName="noise" Content="Plamkowy"/>
                     <Slider  x:Name="noiseScale" Margin="5,10,5,5" Value="{Binding NoiseScale, Mode=TwoWay}" Minimum="0" Maximum="100" />
                 </StackPanel>
             </GroupBox>
             <GroupBox FontFamily="Consolas" Margin="5,5,5,10" Grid.Row="4" Grid.Column="0" x:Name="functionalBox" Header="Funkcjonalność">
                 <StackPanel>
-                    <Button Background="White" BorderBrush="White" Foreground="Black" Margin="5,5,5,5" Content="Zastosuj macierz"/>
+                    <Button Command="{Binding AcceptMatrixCommand}" Background="White" BorderBrush="White" Foreground="Black" Margin="5,5,5,5" Content="Zastosuj macierz"/>
                     <Button Command="{Binding SetNoiseCommand}" CommandParameter="{Binding ElementName=noisePanel}" Background="White" BorderBrush="White" Foreground="Black" Margin="5,5,5,5" Content="Zastosuj szum"/>
                     <Button Background="White" BorderBrush="White" Foreground="Black" Margin="5,5,5,5" Content="Załaduj macierz z pliku"/>
                 </StackPanel>
@@ -110,6 +110,26 @@
                     <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="blackwhite" Grid.Row="0" Grid.Column="2" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Black-White" />
                     <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="sepia" Grid.Row="0" Grid.Column="3" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Sepia" />
                     <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="boxblur" Grid.Row="0" Grid.Column="4" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Box Blur" />
+                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="edgedetection" Grid.Row="1" Grid.Column="0" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}">
+                        <TextBlock TextAlignment="Center" HorizontalAlignment="Center" Text="Edge detection" TextWrapping="Wrap"/>
+                    </Button>
+                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="gaussian3x3" Grid.Row="1" Grid.Column="1" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}">
+                        <TextBlock TextAlignment="Center" HorizontalAlignment="Center" Text="Gaussian Blur 3x3" TextWrapping="Wrap"/>
+                    </Button>
+                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="sharpen" Grid.Row="1" Grid.Column="2" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Sharpen" />
+                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="sobel" Grid.Row="1" Grid.Column="3" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Sobel filter" />
+                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="embossing" Grid.Row="1" Grid.Column="4" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Embossing" />
+                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="extension" Grid.Row="2" Grid.Column="0" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Extension" />
+                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="prewett" Grid.Row="2" Grid.Column="1" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}">
+                        <TextBlock TextAlignment="Center" HorizontalAlignment="Center" Text="Prewitt filter" TextWrapping="Wrap"/>
+                    </Button>
+                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="gaussian5x5" Grid.Row="2" Grid.Column="2" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}">
+                        <TextBlock TextAlignment="Center" HorizontalAlignment="Center" Text="Gaussian Blur 5x5" TextWrapping="Wrap"/>
+                    </Button>
+                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="median" Grid.Row="2" Grid.Column="3" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}">
+                        <TextBlock TextAlignment="Center" HorizontalAlignment="Center" Text="Median 5px filter" TextWrapping="Wrap"/>
+                    </Button>
+                    
                 </Grid>
             </GroupBox>
         </Grid>

@@ -1,6 +1,7 @@
 ﻿using KernelFilters.FitersWithoutKernel;
 using KernelFilters.MatrixFilter;
 using KernelFilters.Noises;
+using KernelFilters.NonLinearFilters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,6 +28,7 @@ namespace KernelFilters
         private RelayCommand saveImageCommand;
         private RelayCommand changeFilterCommand;
         private RelayCommand setNoiseCommand;
+        private RelayCommand acceptMatrixCommand;
 
         /* Aktualny filtr/szum */
         private IFilter actualFilter;
@@ -36,10 +38,23 @@ namespace KernelFilters
         public ImageSource LoadedImage => loadedImage;
         public ImageSource FilteredImage => filteredImage;
         public int NoiseScale { get; set; }
+        public int KernelScale { get; set; }
        
         public ApplicationViewModel(IDialogService service)
         {
             this.dialogService = service;
+        }
+
+        public RelayCommand AcceptMatrixCommand
+        {
+            get
+            {
+                return acceptMatrixCommand ??
+                    (acceptMatrixCommand = new RelayCommand(obj =>
+                    {
+                        MessageBox.Show(KernelScale.ToString());
+                    }));
+            }
         }
 
         public RelayCommand LoadImageCommand
@@ -107,6 +122,33 @@ namespace KernelFilters
                             case "boxblur":
                                 actualFilter = new NormalizedBoxBlur();
                                 break;
+                            case "edgedetection":
+                                actualFilter = new EdgeDetection();
+                                break;
+                            case "gaussian3x3":
+                                actualFilter = new GaussianBlur3x3();
+                                break;
+                            case "sharpen":
+                                actualFilter = new Sharpen();
+                                break;
+                            case "sobel":
+                                actualFilter = new SobelFilter();
+                                break;
+                            case "embossing":
+                                actualFilter = new Emboss();
+                                break;
+                            case "extension":
+                                actualFilter = new ExtensionFilter();
+                                break;
+                            case "prewett":
+                                actualFilter = new Prewitt();
+                                break;
+                            case "gaussian5x5":
+                                actualFilter = new GaussianBlur5x5();
+                                break;
+                            case "median":
+                                actualFilter = new Median5Filter();
+                                break;
                         }
                         filteredImage = actualFilter.Filterize(loadedImage);
                         OnPropertyChanged("FilteredImage");
@@ -126,12 +168,14 @@ namespace KernelFilters
                         foreach(var tmpNoise in noiseFilters)
                         {
                             RadioButton x = tmpNoise as RadioButton;    /* castujemy do RadioButton */
-                            if (x.IsChecked == true)
+                            if (x!=null && x.IsChecked == true)
                             {
                                 noiseName = x.Name;
                                 break;
                             }
                         }
+
+                        if (noiseName == null) return;
 
                         switch(noiseName)
                         {
