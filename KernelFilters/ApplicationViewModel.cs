@@ -156,6 +156,9 @@ namespace KernelFilters
                             case "mirror":
                                 actualFilter = new MirrorFilter();
                                 break;
+                            case "lightborder":
+                                actualFilter = new LightningBorders();
+                                break;
                         }
                         filteredImage = actualFilter.Filterize(loadedImage);
                         OnPropertyChanged("FilteredImage");

@@ -133,6 +133,9 @@
                         <TextBlock TextAlignment="Center" HorizontalAlignment="Center" Text="Channel segregation" TextWrapping="Wrap"/>
                     </Button>
                     <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="mirror" Grid.Row="3" Grid.Column="0" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Mirror" />
+                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="lightborder" Grid.Row="3" Grid.Column="1" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}">
+                        <TextBlock TextAlignment="Center" HorizontalAlignment="Center" Text="Lightning borders" TextWrapping="Wrap"/>
+                    </Button>
                 </Grid>
             </GroupBox>
         </Grid>
