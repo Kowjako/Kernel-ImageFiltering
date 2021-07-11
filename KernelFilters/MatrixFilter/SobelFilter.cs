@@ -9,11 +9,18 @@ namespace KernelFilters.MatrixFilter
 {
     class SobelFilter : IKernelFilter
     {
-        private float[,] kernel =
+        public float[,] kernel =
         {
             {1, 2, 1},
             {0, 0, 0},
             {-1, -2, -1}
+        };
+
+        public float[,] kernel2 =
+        {
+            {1, 0, -1 },
+            {2, 0, -2 },
+            {1, 0, -1 }
         };
 
         public int kernelEdge => 3;
