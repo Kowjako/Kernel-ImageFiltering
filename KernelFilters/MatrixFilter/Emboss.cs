@@ -11,9 +11,9 @@ namespace KernelFilters.MatrixFilter
     {
         private float[,] kernel =
         {
-            {1, 1, 0},
-            {1, 1, -1},
-            {0, -1, -1}
+            {-2, -1, 0},
+            {-1, 1, 1},
+            {0, 1, 2}
         };
 
         public int kernelEdge => 3;
