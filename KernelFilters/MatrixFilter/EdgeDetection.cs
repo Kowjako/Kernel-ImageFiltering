@@ -11,8 +11,8 @@ namespace KernelFilters.MatrixFilter
     {
         private float[,] kernel =
         {
-            {-1, -1, -1},
-            {-1,  8, -1},
+            {-1, -1 ,-1},
+            {-1, 8, -1},
             {-1, -1, -1}
         };
 
