@@ -159,6 +159,9 @@ namespace KernelFilters
                             case "lightborder":
                                 actualFilter = new LightningBorders();
                                 break;
+                            case "glass":
+                                actualFilter = new GlassEffect();
+                                break;
                         }
                         filteredImage = actualFilter.Filterize(loadedImage);
                         OnPropertyChanged("FilteredImage");

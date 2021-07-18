@@ -134,8 +134,9 @@
                     </Button>
                     <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="mirror" Grid.Row="3" Grid.Column="0" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Mirror" />
                     <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="lightborder" Grid.Row="3" Grid.Column="1" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}">
-                        <TextBlock TextAlignment="Center" HorizontalAlignment="Center" Text="Lightning borders" TextWrapping="Wrap"/>
+                        <TextBlock TextAlignment="Center" HorizontalAlignment="Center" Text="Glowing edges" TextWrapping="Wrap"/>
                     </Button>
+                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="glass" Grid.Row="3" Grid.Column="2" Margin="5,5,4,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Glass effect" />
                 </Grid>
             </GroupBox>
         </Grid>

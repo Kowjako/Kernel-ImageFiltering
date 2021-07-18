@@ -62,13 +62,13 @@ namespace KernelFilters
                     {
                         for (int j = -kernelstart; j <= kernelstart; j++)
                         {
-                            kernelPixelsR[i + kernelstart, j + kernelstart] = startImageBMP.GetPixel(x + j, y + i).R;
+                            kernelPixelsR[i + kernelstart, j + kernelstart] = startImageBMP.GetPixel(x + j, y + i).R; //uzupelnienie macierzy 3x3 lub 5x5 
                             kernelPixelsG[i + kernelstart, j + kernelstart] = startImageBMP.GetPixel(x + j, y + i).G;
                             kernelPixelsB[i + kernelstart, j + kernelstart] = startImageBMP.GetPixel(x + j, y + i).B;
                         }
                     }
 
-                    int resultPixelR = (int)Convoluter.Convolute(kernelPixelsR, kernel, kernelEdge, 1.0f / kernelScale);
+                    int resultPixelR = (int)Convoluter.Convolute(kernelPixelsR, kernel, kernelEdge, 1.0f / kernelScale); //mnozenie macierzy * kernel
                     int resultPixelG = (int)Convoluter.Convolute(kernelPixelsG, kernel, kernelEdge, 1.0f / kernelScale);
                     int resultPixelB = (int)Convoluter.Convolute(kernelPixelsB, kernel, kernelEdge, 1.0f / kernelScale);
 
@@ -83,26 +83,26 @@ namespace KernelFilters
                         int resB = (int)Math.Sqrt(resultPixelB * resultPixelB + resultPixelB1 * resultPixelB1);
                         int resG = (int)Math.Sqrt(resultPixelG * resultPixelG + resultPixelG1 * resultPixelG1);
 
-                        if (resB < 0) resB = 0;
+                        if (resB < 0) resB = 0; //kontrola przepelnienia
                         else if (resB > 255) resB = 255;
                         if (resR < 0) resR = 0;
                         else if (resR > 255) resR = 255;
                         if (resG < 0) resG = 0;
                         else if (resG > 255) resG = 255;
 
-                        System.Drawing.Color resultColor = System.Drawing.Color.FromArgb(resR, resG, resB);
+                        System.Drawing.Color resultColor = System.Drawing.Color.FromArgb(resR, resG, resB); //ustawienie kolora po konwolucji
                         outputImageBMP.SetPixel(x, y, resultColor);
                     }
                     /* Another filters */
                     else
                     {
-                        if (resultPixelR < 0) resultPixelR = 0;
+                        if (resultPixelR < 0) resultPixelR = 0; //kontrola przepelnienia
                         else if (resultPixelR > 255) resultPixelR = 255;
                         if (resultPixelG < 0) resultPixelG = 0;
                         else if (resultPixelG > 255) resultPixelG = 255;
                         if (resultPixelB < 0) resultPixelB = 0;
                         else if (resultPixelB > 255) resultPixelB = 255;
-                        System.Drawing.Color resultColor = System.Drawing.Color.FromArgb(resultPixelR, resultPixelG, resultPixelB);
+                        System.Drawing.Color resultColor = System.Drawing.Color.FromArgb(resultPixelR, resultPixelG, resultPixelB); //ustawienie kolora po konwolucji
                         outputImageBMP.SetPixel(x, y, resultColor);
                     }
                 }
