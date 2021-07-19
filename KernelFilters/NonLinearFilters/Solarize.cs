@@ -26,20 +26,20 @@ namespace KernelFilters.NonLinearFilters
             {
                 for (int i = 0; i < startImageBMP.Width; i++)
                 {
-                    draw.Color color = startImageBMP.GetPixel(i, j);
-                    draw.Color newColor = draw.Color.Empty;
+                    uint oldPixel = (uint)startImageBMP.GetPixel(i, j).ToArgb();
 
-                    if (color.R > threshold)
-                        r = (byte)(255 - color.R);
-                    else r = color.R;
-                    if (color.G > threshold)
-                        g = (byte)(255 - color.G);
-                    else g = color.G;
-                    if (color.B > threshold)
-                        b = (byte)(255 - color.B);
-                    else b = color.B;
+                    uint R = ((0x00FF0000) & (uint)oldPixel) >> 16;
+                    uint G = ((0x0000FF00) & (uint)oldPixel) >> 8;
+                    uint B = ((0x000000FF) & (uint)oldPixel);
+                    if (R > threshold)
+                        R = 255 - R;
+                    if (G > threshold)
+                        G = 255 - G;
+                    if (B > threshold)
+                        B = 255 - B;
 
-                    outputImageBMP.SetPixel(i, j, draw.Color.FromArgb(0, r, g, b));
+                    uint newPixel = (0xFF000000) | R << 16 | G << 8 | B;
+                    outputImageBMP.SetPixel(i, j, draw.Color.FromArgb((int)newPixel));
                 }
             }
 
