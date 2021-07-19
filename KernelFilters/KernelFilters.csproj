@@ -95,6 +95,7 @@
     <Compile Include="NonLinearFilters\LightningBorders.cs" />
     <Compile Include="NonLinearFilters\Median5Filter.cs" />
     <Compile Include="NonLinearFilters\MirrorFilter.cs" />
+    <Compile Include="NonLinearFilters\Solarize.cs" />
     <Compile Include="RelayCommand.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

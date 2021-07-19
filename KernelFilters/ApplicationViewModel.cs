@@ -162,6 +162,9 @@ namespace KernelFilters
                             case "glass":
                                 actualFilter = new GlassEffect();
                                 break;
+                            case "solarize":
+                                actualFilter = new Solarize();
+                                break;
                         }
                         filteredImage = actualFilter.Filterize(loadedImage);
                         OnPropertyChanged("FilteredImage");
