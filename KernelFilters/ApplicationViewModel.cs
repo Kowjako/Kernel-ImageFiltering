@@ -165,6 +165,12 @@ namespace KernelFilters
                             case "solarize":
                                 actualFilter = new Solarize();
                                 break;
+                            case "vignette":
+                                actualFilter = new Vignette();
+                                break;
+                            case "posterize":
+                                actualFilter = new Posterize();
+                                break;
                         }
                         filteredImage = actualFilter.Filterize(loadedImage);
                         OnPropertyChanged("FilteredImage");

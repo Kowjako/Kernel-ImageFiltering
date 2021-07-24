@@ -31,6 +31,7 @@ namespace KernelFilters.NonLinearFilters
                     uint R = ((0x00FF0000) & (uint)oldPixel) >> 16;
                     uint G = ((0x0000FF00) & (uint)oldPixel) >> 8;
                     uint B = ((0x000000FF) & (uint)oldPixel);
+
                     if (R > threshold)
                         R = 255 - R;
                     if (G > threshold)
