@@ -17,6 +17,7 @@ namespace KernelFilters.NonLinearFilters
             draw.Bitmap startImageBMP = Converter.ImageSourceToBitmap(sourceImage);
             draw.Bitmap outputImageBMP = new draw.Bitmap(startImageBMP.Width, startImageBMP.Height);
             double radius = 1;
+
             double cx = (double)startImageBMP.Width / 2, cy = (double)startImageBMP.Height / 2;
             double maxDistance = radius * EuclideanDistance(new Point(0, 0), new Point(cx, cy));
             double temp;
@@ -25,7 +26,7 @@ namespace KernelFilters.NonLinearFilters
             {
                 for (int i = 0; i < startImageBMP.Width; i++)
                 {
-                    temp = MyCosinus(EuclideanDistance(new Point(cx, cy), new Point(i, j)) / maxDistance);
+                    temp = FastCosinusApproximation(EuclideanDistance(new Point(cx, cy), new Point(i, j)) / maxDistance);
                     temp = Math.Pow(temp, 3.5);
                     outputImageBMP.SetPixel(i, j, draw.Color.FromArgb(255, (byte)(startImageBMP.GetPixel(i, j).R * temp), (byte)(startImageBMP.GetPixel(i, j).G * temp), (byte)(startImageBMP.GetPixel(i, j).B * temp)));
                 }
@@ -33,15 +34,14 @@ namespace KernelFilters.NonLinearFilters
             return Converter.BitmapToImageSource(outputImageBMP);
         }
 
-        private double MyCosinus(double x)
+        private double FastCosinusApproximation(double x)
         {
-            x += 1.5707;
+            /* Szybka aproksymacja cosinusa */
+            x += Math.PI / 2;
             if (x > Math.PI)
                 x -= 2 * Math.PI;
-            if(x < 0)
-                return 1.27323954 * x + 0.405284735 * x * x;
-            else
-                return 1.27323954 * x - 0.405284735 * x * x;
+            return 4 / Math.PI * x - 4 / Math.Pow(Math.PI, 2) * Math.Abs(x) * x;    /* (4 * x) / pi - (4 * x * |x|) / (pi ^ 2) */
+
         }
 
         private double EuclideanDistance(Point a, Point b)
