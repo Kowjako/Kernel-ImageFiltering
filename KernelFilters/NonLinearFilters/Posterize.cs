@@ -18,6 +18,8 @@ namespace KernelFilters.NonLinearFilters
             int posterizeLevel = 3;
             int numOfAreas = 256 / posterizeLevel;
             int numOfValues = 255 / (posterizeLevel - 1);
+            List<uint> colors = new List<uint>(3);
+            List<uint> newColors = new List<uint>(3);
 
             for (int j = 0; j < startImageBMP.Height; j++)
             {
@@ -29,38 +31,26 @@ namespace KernelFilters.NonLinearFilters
                     uint G = ((0x0000FF00) & (uint)oldPixel) >> 8;
                     uint B = ((0x000000FF) & (uint)oldPixel);
 
-                    /* Dla koloru R */
-                    long redAreaFloat = R / numOfAreas;
-                    int redArea = (int)redAreaFloat;
-                    if (redArea > redAreaFloat)
-                        redArea--;
-                    int newRedFloat = numOfValues * redArea;
-                    int newRed = (int)newRedFloat;
-                    if (newRed > newRedFloat)
-                        newRed--;
+                    colors.Add(R);  colors.Add(G);  colors.Add(B);
 
-                    /* Dla koloru G */
-                    long greenAreaFloat = G / numOfAreas;
-                    int greenArea = (int)greenAreaFloat;
-                    if (greenArea > greenAreaFloat)
-                        greenArea--;
-                    int newGreenFloat = numOfValues * greenArea;
-                    int newGreen = (int)newGreenFloat;
-                    if (newGreen > newGreenFloat)
-                        newGreen--;
+                    foreach(var item in colors)
+                    {
+                        long colorAreaFloat = item / numOfAreas;
+                        int colorArea = (int)colorAreaFloat;
+                        if (colorArea > colorAreaFloat)
+                            colorArea--;
+                        int newColorFloat = numOfValues * colorArea;
+                        int newColor = (int)newColorFloat;
+                        if (newColor > newColorFloat)
+                            newColor--;
+                        newColors.Add((uint)newColor);
+                    }
 
-                    /* Dla koloru B */
-                    long blueAreaFloat = B / numOfAreas;
-                    int blueArea = (int)blueAreaFloat;
-                    if (blueArea > blueAreaFloat)
-                        blueArea--;
-                    int newBlueFloat = numOfValues * blueArea;
-                    int newBlue = (int)newBlueFloat;
-                    if (newBlue > newBlueFloat)
-                        newBlue--;
+                    uint newPixel = (0xFF000000) | newColors[0] << 16 | newColors[1] << 8 | newColors[2];
+                    outputImageBMP.SetPixel(i, j, System.Drawing.Color.FromArgb((int)newPixel));
 
-                    uint newPixel = (0xFF000000) | (uint)newRed << 16 | (uint)newGreen << 8 | (uint)newBlue;
-                    outputImageBMP.SetPixel(i, j, System.Drawing.Color.FromArgb((int)newPixel));              
+                    newColors.Clear();
+                    colors.Clear();           
                 }
             }
             return Converter.BitmapToImageSource(outputImageBMP);
