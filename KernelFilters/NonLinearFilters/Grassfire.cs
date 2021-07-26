@@ -15,7 +15,8 @@ namespace KernelFilters.NonLinearFilters
             width = startImageBMP.Width;
             heigth = startImageBMP.Height;
             byte[] colors = new byte[width * heigth];
-            byte newColor;
+            byte newColor, R, G, B;
+
             for (int j = 0; j < startImageBMP.Height; j++)
             {
                 for (int i = 0; i < startImageBMP.Width; i++)
@@ -38,14 +39,13 @@ namespace KernelFilters.NonLinearFilters
                 }
             }
 
+            
+
             for (int i = 0; i < startImageBMP.Height; i++)
             {
                 for (int j = 0; j < startImageBMP.Width; j++)
                 {
-                    byte R = colors[i * width + j];
-                    byte G = colors[i * width + j];
-                    byte B = colors[i * width + j];
-
+                    R = G = B = colors[i * width + j];
                     uint newPixel = 0xFF000000 | (uint)R << 16 | (uint)G << 8 | B;
                     startImageBMP.SetPixel(j, i, System.Drawing.Color.FromArgb((int)newPixel));
                 }
