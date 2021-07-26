@@ -171,6 +171,9 @@ namespace KernelFilters
                             case "posterize":
                                 actualFilter = new Posterize();
                                 break;
+                            case "grassfire":
+                                actualFilter = new Grassfire();
+                                break;
                         }
                         filteredImage = actualFilter.Filterize(loadedImage);
                         OnPropertyChanged("FilteredImage");

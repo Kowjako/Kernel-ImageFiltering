@@ -141,10 +141,10 @@
                     <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="solarize" Grid.Row="3" Grid.Column="4" Margin="5,5,4,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Solarize" />
                     <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="vignette" Grid.Row="4" Grid.Column="0" Margin="5,5,4,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Vignette" />
                     <!-- To implement -->
-                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="vintage" Grid.Row="4" Grid.Column="1" Margin="5,5,4,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Vintage" />
-                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="love" Grid.Row="4" Grid.Column="2" Margin="5,5,4,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Love" />
-                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="hermajestry" Grid.Row="4" Grid.Column="3" Margin="5,5,4,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Her Majestry" />
-                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="hemingway" Grid.Row="4" Grid.Column="4" Margin="5,5,4,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Hemingway" />
+                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="grassfire" Grid.Row="4" Grid.Column="1" Margin="5,5,4,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Grassfire" />
+                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="love" Grid.Row="4" Grid.Column="2" Margin="5,5,4,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="" />
+                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="hermajestry" Grid.Row="4" Grid.Column="3" Margin="5,5,4,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="" />
+                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="hemingway" Grid.Row="4" Grid.Column="4" Margin="5,5,4,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="" />
                 </Grid>
             </GroupBox>
         </Grid>

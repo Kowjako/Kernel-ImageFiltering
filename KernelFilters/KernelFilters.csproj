@@ -92,6 +92,7 @@
     <Compile Include="Noises\SpackleNoise.cs" />
     <Compile Include="NonLinearFilters\ChannelSegregation.cs" />
     <Compile Include="NonLinearFilters\GlassEffect.cs" />
+    <Compile Include="NonLinearFilters\Grassfire.cs" />
     <Compile Include="NonLinearFilters\LightningBorders.cs" />
     <Compile Include="NonLinearFilters\Median5Filter.cs" />
     <Compile Include="NonLinearFilters\MirrorFilter.cs" />
