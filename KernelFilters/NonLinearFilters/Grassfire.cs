@@ -11,35 +11,26 @@ namespace KernelFilters.NonLinearFilters
         public ImageSource Filterize(ImageSource sourceImage)
         {
             Random r = new Random();
-            Bitmap startImageBMP = Converter.ImageSourceToBitmap(new GrayScaleFilter().Filterize(sourceImage));
+            Bitmap startImageBMP = Converter.ImageSourceToBitmap(sourceImage);
             width = startImageBMP.Width;
             heigth = startImageBMP.Height;
-            byte[] colors = new byte[3 * width * heigth];
+            byte[] colors = new byte[width * heigth];
             byte newColor;
-            int iterator = 0;
             for (int j = 0; j < startImageBMP.Height; j++)
             {
                 for (int i = 0; i < startImageBMP.Width; i++)
                 {
-                    colors[iterator] = startImageBMP.GetPixel(i, j).R;
-                    colors[iterator + 1] = startImageBMP.GetPixel(i, j).G;
-                    colors[iterator + 2] = startImageBMP.GetPixel(i, j).B;
-                    iterator += 3;
+                    colors[j * width + i] = (byte)((startImageBMP.GetPixel(i, j).R + startImageBMP.GetPixel(i, j).B + startImageBMP.GetPixel(i, j).G) / 3);
+                    if (colors[j*width + i] > 200) colors[j * width + i] = 255;
+                    else colors[j * width + i] = 0;
                 }
-            }
-
-            iterator = 0;
-            for (int i = 0; i < 3 * width * heigth; i++)
-            {
-                if (colors[i] > 200) colors[i] = 255;
-                else colors[i] = 0;
             }
 
             for (int y = 0; y < startImageBMP.Height; y++)
             {
                 for (int x = 0; x < startImageBMP.Width; x++)
                 {
-                    if(colors[y * startImageBMP.Width + x] == 255)
+                    if(colors[y*width + x] == 255)
                     {
                         newColor = (byte)(r.Next(0, 221) + 30);
                         GrassFire(ref colors, x, y, newColor);
@@ -47,20 +38,18 @@ namespace KernelFilters.NonLinearFilters
                 }
             }
 
-            iterator = 0;
             for (int i = 0; i < startImageBMP.Height; i++)
             {
                 for (int j = 0; j < startImageBMP.Width; j++)
                 {
-                    byte R = colors[iterator];
-                    byte G = colors[iterator + 1];
-                    byte B = colors[iterator + 2];
+                    byte R = colors[i * width + j];
+                    byte G = colors[i * width + j];
+                    byte B = colors[i * width + j];
 
                     uint newPixel = 0xFF000000 | (uint)R << 16 | (uint)G << 8 | B;
                     startImageBMP.SetPixel(j, i, System.Drawing.Color.FromArgb((int)newPixel));
-                    iterator += 3;
                 }
-            }
+            } 
 
             return Converter.BitmapToImageSource(startImageBMP);
         }
