@@ -27,20 +27,77 @@ namespace KernelFilters.NonLinearFilters
                     regionR.Add(pixel.R);
                     regionB.Add(pixel.B);
                     regionG.Add(pixel.G);
-                    ProcessRegion();
+                    resultPixel = ProcessRegion(regionR);
                 }
             }
+
+            return null;
         }
 
-        private byte Process(List<System.Drawing.Color> kernelKuwahara)
+        private System.Drawing.Color ProcessRegion(List<int> regionR)
         {
+            Dictionary<double, double> meanAndVariance = new Dictionary<double, double>();
+            /* Obliczanie dla R */
+            var region1 = new List<int>();
+            var region2 = new List<int>();
+            var region3 = new List<int>();
+            var region4 = new List<int>();
+
+            var counter = 0;
             for (int i = 0; i < 3; i++)
+            {
                 for (int j = 0; j < 3; j++)
                 {
-                    region1R.Add(kernelKuwahara[i * 3 + j].R);
-                    region1G.Add(kernelKuwahara[i * 3 + i].G);
-                    region1B.Add(kernelKuwahara[i * 3 + i].B);
+                    region1.Add(regionR[i * counter + j]);
                 }
+                counter += 5;
+            }
+
+            counter = 0;
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 2; j < 5; j++)
+                {
+                    region2.Add(regionR[i * counter + j]);
+                }
+                counter += 5;
+            }
+
+            counter = 0;
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    region3.Add(regionR[i * counter + j + 10]);
+                }
+                counter += 5;
+            }
+
+            counter = 0;
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 2; j < 5; j++)
+                {
+                    region4.Add(regionR[i * counter + j + 10]);
+                }
+                counter += 5;
+            }
+
+            meanAndVariance.Add(Variance(region1, region1.Average()), region1.Average());
+            meanAndVariance.Add(Variance(region2, region2.Average()), region2.Average());
+            meanAndVariance.Add(Variance(region3, region3.Average()), region3.Average());
+            meanAndVariance.Add(Variance(region4, region4.Average()), region4.Average());
+
+        }
+
+        private double Variance(List<int> list, double avg)
+        {
+            double sum = 0;
+            for (int i = 0; i < 9; i++)
+            {
+                sum += Math.Pow(avg - list[i], 2);
+            }
+            return sum / 9.0f;
         }
     }
 }

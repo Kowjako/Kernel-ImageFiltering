@@ -11,7 +11,6 @@ namespace KernelFilters.NonLinearFilters
     class Solarize : IFilter
     {
         int dimension, threshold;
-        byte r, g, b;
         public ImageSource Filterize(ImageSource sourceImage)
         {
             draw.Bitmap startImageBMP = null, outputImageBMP = null;
