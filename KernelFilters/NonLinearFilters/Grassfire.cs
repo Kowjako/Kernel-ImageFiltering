@@ -22,7 +22,7 @@ namespace KernelFilters.NonLinearFilters
                 for (int i = 0; i < startImageBMP.Width; i++)
                 {
                     colors[j * width + i] = (byte)((startImageBMP.GetPixel(i, j).R + startImageBMP.GetPixel(i, j).B + startImageBMP.GetPixel(i, j).G) / 3);
-                    if (colors[j*width + i] > 200) colors[j * width + i] = 255;
+                    if (colors[j * width + i] > 200) colors[j * width + i] = 255;
                     else colors[j * width + i] = 0;
                 }
             }
@@ -31,15 +31,13 @@ namespace KernelFilters.NonLinearFilters
             {
                 for (int x = 0; x < startImageBMP.Width; x++)
                 {
-                    if(colors[y*width + x] == 255)
+                    if (colors[y * width + x] == 255)
                     {
                         newColor = (byte)(r.Next(0, 221) + 30);
                         GrassFire(ref colors, x, y, newColor);
                     }
                 }
             }
-
-            
 
             for (int i = 0; i < startImageBMP.Height; i++)
             {

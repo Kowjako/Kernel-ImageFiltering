@@ -174,6 +174,9 @@ namespace KernelFilters
                             case "grassfire":
                                 actualFilter = new Grassfire();
                                 break;
+                            case "kuwahara":
+                                actualFilter = new Kuwahara();
+                                break;
                         }
                         filteredImage = actualFilter.Filterize(loadedImage);
                         OnPropertyChanged("FilteredImage");
