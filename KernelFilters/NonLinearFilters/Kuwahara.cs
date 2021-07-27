@@ -17,21 +17,31 @@ namespace KernelFilters.NonLinearFilters
         public ImageSource Filterize(ImageSource sourceImage)
         {
             Bitmap startImageBMP = Converter.ImageSourceToBitmap(sourceImage);
-            System.Drawing.Color pixel, resultPixel;
+            Bitmap outputImageBMP = new Bitmap(startImageBMP.Width, startImageBMP.Height);
+            System.Drawing.Color resultPixel;
 
-            for (int j = 2; j < startImageBMP.Height - 2; j++)
+            for (int x = 2; x < startImageBMP.Width - 2; x++)
             {
-                for (int i = 2; i < startImageBMP.Width - 2; i++)
+                for (int y = 2; y < startImageBMP.Height - 2; y++)
                 {
-                    pixel = startImageBMP.GetPixel(i, j);
-                    regionR.Add(pixel.R);
-                    regionB.Add(pixel.B);
-                    regionG.Add(pixel.G);
+                    for (int i = -2; i <= 2; i++)
+                    {
+                        for (int j = -2; j <= 2; j++)
+                        {
+                            regionR.Add(startImageBMP.GetPixel(x + j, y + i).R);
+                            regionG.Add(startImageBMP.GetPixel(x + j, y + i).G);
+                            regionB.Add(startImageBMP.GetPixel(x + j, y + i).B);
+                        }
+                    }
                     resultPixel = System.Drawing.Color.FromArgb(255, ProcessRegion(regionR), ProcessRegion(regionG), ProcessRegion(regionB));
+                    regionR.Clear();
+                    regionB.Clear();
+                    regionG.Clear();
+                    outputImageBMP.SetPixel(x,y, resultPixel);
                 }
             }
 
-            return null;
+            return Converter.BitmapToImageSource(outputImageBMP);
         }
 
         private int ProcessRegion(List<int> regionR)
@@ -50,7 +60,7 @@ namespace KernelFilters.NonLinearFilters
                 {
                     region1.Add(regionR[i * counter + j]);
                 }
-                counter += 5;
+                counter = 5;
             }
 
             counter = 0;
@@ -70,7 +80,7 @@ namespace KernelFilters.NonLinearFilters
                 {
                     region3.Add(regionR[i * counter + j + 10]);
                 }
-                counter += 5;
+                counter = 5;
             }
 
             counter = 0;
@@ -80,7 +90,7 @@ namespace KernelFilters.NonLinearFilters
                 {
                     region4.Add(regionR[i * counter + j + 10]);
                 }
-                counter += 5;
+                counter = 5;
             }
 
             meanAndVariance.Add(Variance(region1, region1.Average()), region1.Average());
@@ -98,7 +108,6 @@ namespace KernelFilters.NonLinearFilters
 
             return (int)meanAndVariance[minVariance];   /* bierzemy wartość średnią regionu z minimalną wariancją */
         }
-
         private double Variance(List<int> list, double avg)
         {
             double sum = 0;
