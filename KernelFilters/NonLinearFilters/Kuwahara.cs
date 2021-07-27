@@ -10,9 +10,9 @@ namespace KernelFilters.NonLinearFilters
 {
     class Kuwahara : IFilter
     {
-        List<byte> regionR = new List<byte>(25);
-        List<byte> regionG = new List<byte>(25);
-        List<byte> regionB = new List<byte>(25);
+        List<int> regionR = new List<int>(25);
+        List<int> regionG = new List<int>(25);
+        List<int> regionB = new List<int>(25);
 
         public ImageSource Filterize(ImageSource sourceImage)
         {
@@ -27,14 +27,14 @@ namespace KernelFilters.NonLinearFilters
                     regionR.Add(pixel.R);
                     regionB.Add(pixel.B);
                     regionG.Add(pixel.G);
-                    resultPixel = ProcessRegion(regionR);
+                    resultPixel = System.Drawing.Color.FromArgb(255, ProcessRegion(regionR), ProcessRegion(regionG), ProcessRegion(regionB));
                 }
             }
 
             return null;
         }
 
-        private System.Drawing.Color ProcessRegion(List<int> regionR)
+        private int ProcessRegion(List<int> regionR)
         {
             Dictionary<double, double> meanAndVariance = new Dictionary<double, double>();
             /* Obliczanie dla R */
@@ -88,6 +88,15 @@ namespace KernelFilters.NonLinearFilters
             meanAndVariance.Add(Variance(region3, region3.Average()), region3.Average());
             meanAndVariance.Add(Variance(region4, region4.Average()), region4.Average());
 
+            double minVariance = meanAndVariance.Keys.Min();
+
+            region1.Clear();
+            region2.Clear();
+            region3.Clear();
+            region4.Clear();
+            meanAndVariance.Clear();
+
+            return (int)meanAndVariance[minVariance];   /* bierzemy wartość średnią regionu z minimalną wariancją */
         }
 
         private double Variance(List<int> list, double avg)
