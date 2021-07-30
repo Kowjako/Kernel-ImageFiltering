@@ -8,11 +8,17 @@ using System.Windows.Media;
 
 namespace KernelFilters.NonLinearFilters
 {
-    class Kuwahara : IFilter
+    class Kuwahara : IFilter        /* KUWAHARA 5x5 FILTER */
     {
         List<int> regionR = new List<int>(25);
         List<int> regionG = new List<int>(25);
         List<int> regionB = new List<int>(25);
+
+        List<int> region1 = new List<int>();    /* mając kernel 5x5 mamy 4 regiony 3x3 */
+        List<int> region2 = new List<int>();
+        List<int> region3 = new List<int>();
+        List<int> region4 = new List<int>();
+        List<KeyValuePair<double, double>> meanAndVariance = new List<KeyValuePair<double, double>>();
 
         public ImageSource Filterize(ImageSource sourceImage)
         {
@@ -46,13 +52,6 @@ namespace KernelFilters.NonLinearFilters
 
         private int ProcessRegion(List<int> regionR)
         {
-            Dictionary<double, double> meanAndVariance = new Dictionary<double, double>();
-            /* Obliczanie dla R */
-            var region1 = new List<int>();
-            var region2 = new List<int>();
-            var region3 = new List<int>();
-            var region4 = new List<int>();
-
             var counter = 0;
             for (int i = 0; i < 3; i++)
             {
@@ -93,20 +92,20 @@ namespace KernelFilters.NonLinearFilters
                 counter = 5;
             }
 
-            meanAndVariance.Add(Variance(region1, region1.Average()), region1.Average());
-            meanAndVariance.Add(Variance(region2, region2.Average()), region2.Average());
-            meanAndVariance.Add(Variance(region3, region3.Average()), region3.Average());
-            meanAndVariance.Add(Variance(region4, region4.Average()), region4.Average());
+            meanAndVariance.Clear();
+            meanAndVariance.Add(new KeyValuePair<double, double>(Variance(region1, region1.Average()), region1.Average()));
+            meanAndVariance.Add(new KeyValuePair<double, double>(Variance(region2, region2.Average()), region2.Average()));
+            meanAndVariance.Add(new KeyValuePair<double, double>(Variance(region3, region3.Average()), region3.Average()));
+            meanAndVariance.Add(new KeyValuePair<double, double>(Variance(region4, region4.Average()), region4.Average()));
 
-            double minVariance = meanAndVariance.Keys.Min();
+            double minVariance = meanAndVariance.OrderBy(e => e.Key).First().Key;
 
             region1.Clear();
             region2.Clear();
             region3.Clear();
             region4.Clear();
-            meanAndVariance.Clear();
 
-            return (int)meanAndVariance[minVariance];   /* bierzemy wartość średnią regionu z minimalną wariancją */
+            return (int)meanAndVariance.First(e => e.Key == minVariance).Value;   /* bierzemy wartość średnią regionu z minimalną wariancją */
         }
         private double Variance(List<int> list, double avg)
         {
