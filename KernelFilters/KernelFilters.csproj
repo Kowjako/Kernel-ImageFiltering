@@ -49,6 +49,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -71,6 +72,7 @@
     <Compile Include="Converter.cs" />
     <Compile Include="Convoluter.cs" />
     <Compile Include="FitersWithoutKernel\BlackWhiteFilter.cs" />
+    <Compile Include="FitersWithoutKernel\ColorAccent.cs" />
     <Compile Include="FitersWithoutKernel\GrayScaleFilter.cs" />
     <Compile Include="FitersWithoutKernel\NegativeFilter.cs" />
     <Compile Include="FitersWithoutKernel\SepiaFilter.cs" />

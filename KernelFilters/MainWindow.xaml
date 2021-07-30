@@ -145,7 +145,7 @@
                     <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="kuwahara" Grid.Row="4" Grid.Column="2" Margin="5,5,5,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}">
                         <TextBlock TextAlignment="Center" HorizontalAlignment="Center" Text="Kuwahara's filter" TextWrapping="Wrap"/>
                     </Button>
-                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="hermajestry" Grid.Row="4" Grid.Column="3" Margin="5,5,4,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="" />
+                    <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="accent" Grid.Row="4" Grid.Column="3" Margin="5,5,4,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Color accent" />
                     <Button Height="50" Command="{Binding ChangeFilterCommand}" CommandParameter="hemingway" Grid.Row="4" Grid.Column="4" Margin="5,5,4,5" FontSize="11" Style="{StaticResource MaterialDesignOutlinedButton}" Content="" />
                 </Grid>
             </GroupBox>

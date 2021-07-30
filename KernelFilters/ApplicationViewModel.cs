@@ -177,6 +177,9 @@ namespace KernelFilters
                             case "kuwahara":
                                 actualFilter = new Kuwahara();
                                 break;
+                            case "accent":
+                                actualFilter = new ColorAccent();
+                                break;
                         }
                         filteredImage = actualFilter.Filterize(loadedImage);
                         OnPropertyChanged("FilteredImage");
