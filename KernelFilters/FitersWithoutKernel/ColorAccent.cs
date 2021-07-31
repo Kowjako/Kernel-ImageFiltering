@@ -72,7 +72,7 @@ namespace KernelFilters.FitersWithoutKernel
 
             /* Obliczenie Hue z koloru RGB */
             if (hues[0] == maxValue)
-                HueTmp = ((hues[1] - hues[2]) / (maxValue - minValue));
+                HueTmp = (hues[1] - hues[2]) / (maxValue - minValue);
             if (hues[1] == maxValue)
                 HueTmp = 2.0f + (hues[2] - hues[0]) / (maxValue - minValue);
             else

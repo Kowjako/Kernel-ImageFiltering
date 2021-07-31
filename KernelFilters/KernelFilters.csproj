@@ -75,6 +75,7 @@
     <Compile Include="FitersWithoutKernel\ColorAccent.cs" />
     <Compile Include="FitersWithoutKernel\GrayScaleFilter.cs" />
     <Compile Include="FitersWithoutKernel\NegativeFilter.cs" />
+    <Compile Include="FitersWithoutKernel\Pixelize.cs" />
     <Compile Include="FitersWithoutKernel\SepiaFilter.cs" />
     <Compile Include="IFilter.cs" />
     <Compile Include="IKernelFilter.cs" />

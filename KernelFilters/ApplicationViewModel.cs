@@ -180,6 +180,9 @@ namespace KernelFilters
                             case "accent":
                                 actualFilter = new ColorAccent();
                                 break;
+                            case "pixelize":
+                                actualFilter = new Pixelize();
+                                break;
                         }
                         filteredImage = actualFilter.Filterize(loadedImage);
                         OnPropertyChanged("FilteredImage");
