@@ -13,6 +13,7 @@ namespace KernelFilters.FitersWithoutKernel
     {
         float Hue = 0, Radius = 0, h1, h2;
         List<float> hues = new List<float>(3);
+        System.Drawing.Color newPixel, color;
         public ImageSource Filterize(ImageSource sourceImage)
         {
             Bitmap startImageBMP = Converter.ImageSourceToBitmap(sourceImage);
@@ -28,12 +29,12 @@ namespace KernelFilters.FitersWithoutKernel
 
             Hue = RGBtoHSV(accentedColor);
             
-            Radius = 40;
+            Radius = 50;
             h1 = (Hue - Radius / 2 + 360) % 360;
             h2 = (Hue + Radius / 2 + 360) % 360;
 
             var HueIntensity = 0.0f;
-            System.Drawing.Color newPixel, color;
+            
             for (int j = 0; j < startImageBMP.Height; j++)
             {
                 for (int i = 0; i < startImageBMP.Width; i++)
@@ -63,22 +64,22 @@ namespace KernelFilters.FitersWithoutKernel
         private float RGBtoHSV(System.Drawing.Color accentedColor)
         {
             float HueTmp;
-            hues.Add(accentedColor.R / 255);
-            hues.Add(accentedColor.G / 255);
-            hues.Add(accentedColor.B / 255);
+            hues.Add(accentedColor.R / 255.0f);
+            hues.Add(accentedColor.G / 255.0f);
+            hues.Add(accentedColor.B / 255.0f);
 
             float minValue = hues.Min(), maxValue = hues.Max();
 
             /* Obliczenie Hue z koloru RGB */
             if (hues[0] == maxValue)
-                HueTmp = (hues[1] - hues[2]) / (maxValue - minValue);
+                HueTmp = ((hues[1] - hues[2]) / (maxValue - minValue));
             if (hues[1] == maxValue)
                 HueTmp = 2.0f + (hues[2] - hues[0]) / (maxValue - minValue);
             else
                 HueTmp = 4.0f + (hues[0] - hues[1]) / (maxValue - minValue);
 
             hues.Clear();
-            return HueTmp;
+            return HueTmp * 60;
         }
     }
 }
