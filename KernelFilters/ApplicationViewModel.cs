@@ -53,7 +53,6 @@ namespace KernelFilters
                 return acceptMatrixCommand ??
                     (acceptMatrixCommand = new RelayCommand(obj =>
                     {
-                        
                     }));
             }
         }

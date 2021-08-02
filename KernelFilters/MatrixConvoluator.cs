@@ -18,6 +18,16 @@ namespace KernelFilters
         private int kernelEdge;
         private float kernelScale;
 
+        public MatrixConvoluator(int[,] kernel, ImageSource image, int kernelEdge, int kernelScale)
+        {
+            for (int i = 0; i < kernel.GetLength(0); i++)
+                for (int j = 0; j < kernel.GetLength(1); j++)
+                    this.kernel[i, j] = (float)kernel[i, j];
+            this.image = image;
+            this.kernelEdge = kernelEdge;
+            this.kernelScale = kernelScale;
+        }
+
         public MatrixConvoluator(IKernelFilter filter, ImageSource image, int kernelEdge, int kernelScale)
         {
             this.kernel = filter.kernel;
