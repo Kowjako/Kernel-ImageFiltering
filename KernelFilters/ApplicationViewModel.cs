@@ -58,19 +58,30 @@ namespace KernelFilters
                         {
                             string kernelPath = dialogService.FilePath;
                             string[] rowValues;
+                            var iterator = 0;
                             using (StreamReader sr = new StreamReader(kernelPath))
                             {
                                 var row = String.Empty;
-                                var iterator = 0;
                                 while((row = sr.ReadLine()) != null)
                                 {
                                     iterator++;
                                 }
                                 UserKernel = new Bindable2DArray<int>(iterator, iterator);
                             }
+
+                            var outItearator = 0;
                             using(StreamReader sr = new StreamReader(kernelPath))
                             {
-
+                                var row = string.Empty;
+                                while((row = sr.ReadLine()) != null)
+                                {
+                                    rowValues = row.Split(' ');
+                                    for (int i = 0; i < iterator; i++)
+                                    {
+                                        UserKernel[outItearator, i] = int.Parse(rowValues[i]);
+                                    }
+                                    outItearator++;
+                                }
                             }
                         }
                     }));
