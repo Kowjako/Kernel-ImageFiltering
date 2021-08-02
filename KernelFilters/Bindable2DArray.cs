@@ -58,6 +58,12 @@ namespace KernelFilters
             }
         }
 
+        /* Żeby można było cast-ować BindableArray na tablice prymitywnych typów */
+        public static implicit operator T[,] (Bindable2DArray<T> a)
+        {
+            return a.data;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
