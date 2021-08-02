@@ -4,4 +4,5 @@ Program przedstawia realizację filtrów konwolucyjnych i nie tylko, przedstawio
 # Algorytmy poszczególnych filtrow
 # Klasa Binding2DArray
 # Wyniki filtrów
+# Screenshot
 
