@@ -12,7 +12,8 @@ namespace KernelFilters
     class MatrixConvoluator
     {
         bool isSobel = false;
-        private float[,] kernel, kernel2;
+        public float[,] kernel { get; set; }
+        private float[,] kernel2;
         private ImageSource image;
         private int kernelEdge;
         private float kernelScale;

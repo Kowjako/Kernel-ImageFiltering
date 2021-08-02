@@ -17,7 +17,7 @@ using System.Windows.Media.Imaging;
 
 namespace KernelFilters
 {
-    class ApplicationViewModel : INotifyPropertyChanged
+    class ApplicationViewModel : INotifyPropertyChanged 
     {
         /* Otwieranie/zapisywanie plikow */
         protected IDialogService dialogService;
@@ -39,7 +39,8 @@ namespace KernelFilters
         public ImageSource FilteredImage => filteredImage;
         public int NoiseScale { get; set; }
         public int KernelScale { get; set; }
-       
+        public Bindable2DArray<int> UserKernel { get; set; } = new Bindable2DArray<int>(5, 5);
+
         public ApplicationViewModel(IDialogService service)
         {
             this.dialogService = service;
@@ -52,7 +53,7 @@ namespace KernelFilters
                 return acceptMatrixCommand ??
                     (acceptMatrixCommand = new RelayCommand(obj =>
                     {
-                        MessageBox.Show(KernelScale.ToString());
+                        
                     }));
             }
         }
