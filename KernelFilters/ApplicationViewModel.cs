@@ -38,7 +38,7 @@ namespace KernelFilters
         public ImageSource LoadedImage => loadedImage;
         public ImageSource FilteredImage => filteredImage;
         public int NoiseScale { get; set; }
-        public int KernelScale { get; set; }
+        public int KernelScale { get; set; } = 1;
         public Bindable2DArray<int> UserKernel { get; set; } = new Bindable2DArray<int>(5, 5);
 
         public ApplicationViewModel(IDialogService service)
@@ -53,6 +53,20 @@ namespace KernelFilters
                 return acceptMatrixCommand ??
                     (acceptMatrixCommand = new RelayCommand(obj =>
                     {
+                        if(loadedImage != null)
+                        {
+                            var kernelEdge = 3;
+                            /* Jeżeli jest niezerowy element w pierwszym wierszu znaczy macierz konwolucji jest 5x5 */
+                            for (int i = 0; i < 5; i++)
+                                if (UserKernel[0, i] != 0)
+                                {
+                                    kernelEdge = 5;
+                                    break;
+                                }
+                            MatrixConvoluator mc = new MatrixConvoluator(UserKernel, loadedImage, kernelEdge, KernelScale);
+                            filteredImage = mc.Convoluate();
+                            OnPropertyChanged("FilteredImage");
+                        }
                     }));
             }
         }
