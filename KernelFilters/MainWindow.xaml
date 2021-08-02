@@ -78,7 +78,7 @@
                 <StackPanel>
                     <Button Command="{Binding AcceptMatrixCommand}" Background="White" BorderBrush="White" Foreground="Black" Margin="5,5,5,5" Content="Zastosuj macierz"/>
                     <Button Command="{Binding SetNoiseCommand}" CommandParameter="{Binding ElementName=noisePanel}" Background="White" BorderBrush="White" Foreground="Black" Margin="5,5,5,5" Content="Zastosuj szum"/>
-                    <Button Background="White" BorderBrush="White" Foreground="Black" Margin="5,5,5,5" Content="Załaduj macierz z pliku"/>
+                    <Button Command="{Binding LoadKernelFromFile}" Background="White" BorderBrush="White" Foreground="Black" Margin="5,5,5,5" Content="Załaduj macierz z pliku"/>
                 </StackPanel>
             </GroupBox>
             <GroupBox FontFamily="Consolas" Header="Obraz wyjściowy" Margin="5,5,5,5" Grid.Row ="1" Grid.RowSpan="2" Grid.Column="1">

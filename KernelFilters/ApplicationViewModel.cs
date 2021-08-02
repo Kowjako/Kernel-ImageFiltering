@@ -29,6 +29,7 @@ namespace KernelFilters
         private RelayCommand changeFilterCommand;
         private RelayCommand setNoiseCommand;
         private RelayCommand acceptMatrixCommand;
+        private RelayCommand loadKernelFromFile;
 
         /* Aktualny filtr/szum */
         private IFilter actualFilter;
@@ -44,6 +45,36 @@ namespace KernelFilters
         public ApplicationViewModel(IDialogService service)
         {
             this.dialogService = service;
+        }
+
+        public RelayCommand LoadKernelFromFile
+        {
+            get
+            {
+                return loadKernelFromFile ??
+                    (loadKernelFromFile = new RelayCommand(obj =>
+                    {
+                        if(dialogService.OpenFileDialog() == true)
+                        {
+                            string kernelPath = dialogService.FilePath;
+                            string[] rowValues;
+                            using (StreamReader sr = new StreamReader(kernelPath))
+                            {
+                                var row = String.Empty;
+                                var iterator = 0;
+                                while((row = sr.ReadLine()) != null)
+                                {
+                                    iterator++;
+                                }
+                                UserKernel = new Bindable2DArray<int>(iterator, iterator);
+                            }
+                            using(StreamReader sr = new StreamReader(kernelPath))
+                            {
+
+                            }
+                        }
+                    }));
+            }
         }
 
         public RelayCommand AcceptMatrixCommand
