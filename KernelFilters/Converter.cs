@@ -14,6 +14,7 @@ namespace KernelFilters
     {
         public static Bitmap ImageSourceToBitmap(ImageSource source)
         {
+            if (source == null) return null;
             BitmapImage startImage = source as BitmapImage;
             using (MemoryStream outStream = new MemoryStream())
             {
@@ -27,6 +28,7 @@ namespace KernelFilters
 
         public static ImageSource BitmapToImageSource(Bitmap source)
         {
+            if (source == null) return null;
             using (MemoryStream memory = new MemoryStream())
             {
                 source.Save(memory, System.Drawing.Imaging.ImageFormat.Bmp);

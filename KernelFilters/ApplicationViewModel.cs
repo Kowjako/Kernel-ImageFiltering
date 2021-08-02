@@ -207,7 +207,11 @@ namespace KernelFilters
                                 break;
                             case "segregation":
                                 var x = Microsoft.VisualBasic.Interaction.InputBox("Choose channel for segregtion 0 - R, 1 - G, 2 - B", "Segregation Filter", null);
-                                actualFilter = new ChannelSegregation(Int32.Parse(x));
+                                try
+                                {
+                                    actualFilter = new ChannelSegregation(Int32.Parse(x));
+                                }
+                                catch (Exception) { }
                                 break;
                             case "mirror":
                                 actualFilter = new MirrorFilter();
@@ -240,7 +244,11 @@ namespace KernelFilters
                                 actualFilter = new Pixelize();
                                 break;
                         }
-                        filteredImage = actualFilter.Filterize(loadedImage);
+                        try
+                        {
+                            filteredImage = actualFilter.Filterize(loadedImage);
+                        }
+                        catch (NullReferenceException ex) { }
                         OnPropertyChanged("FilteredImage");
                     }));
             }
