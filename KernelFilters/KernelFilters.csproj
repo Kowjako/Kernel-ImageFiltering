@@ -69,6 +69,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ApplicationViewModel.cs" />
+    <Compile Include="Bindable2DArray.cs" />
     <Compile Include="Converter.cs" />
     <Compile Include="Convoluter.cs" />
     <Compile Include="FitersWithoutKernel\BlackWhiteFilter.cs" />

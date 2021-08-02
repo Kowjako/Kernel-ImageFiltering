@@ -20,10 +20,12 @@ namespace KernelFilters
     /// </summary>
     public partial class MainWindow : Window
     {
+        ApplicationViewModel ViewModel = null;
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new ApplicationViewModel(new DefaultDialogService());
+            ViewModel = new ApplicationViewModel(new DefaultDialogService());
+            this.DataContext = ViewModel;
         }
 
         private void closeBtn_MouseUp(object sender, MouseButtonEventArgs e)
@@ -42,15 +44,12 @@ namespace KernelFilters
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    TextBox tmp = null;
-                    if (i != 4)
-                    {
-                        tmp = new TextBox() { Text = "0", Margin = new Thickness(0,0,0,6), Width = 25, Height = 25, Name = $"box{i}{j}" };
-                    }
-                    else
-                    {
-                        tmp = new TextBox() { Text = "0", Margin = new Thickness(0,0,0,6), Width = 25, Height = 25, Name = $"box{i}{j}" };
-                    }
+                    var binding = new Binding();
+                    var tmp = new TextBox() {Margin = new Thickness(0, 0, 0, 6), Width = 25, Height = 25, Name = $"box{i}{j}" };
+                    binding.Path = new PropertyPath("UserKernel["+ViewModel.UserKernel.GetStringIndex(i, j) + "]");
+                    binding.Mode = BindingMode.TwoWay;
+                    tmp.SetBinding(TextBox.TextProperty, binding);
+
                     Grid.SetRow(tmp, i);
                     Grid.SetColumn(tmp, j);
                     matrixGrid.Children.Add(tmp);

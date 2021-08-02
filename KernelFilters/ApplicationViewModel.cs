@@ -17,7 +17,7 @@ using System.Windows.Media.Imaging;
 
 namespace KernelFilters
 {
-    class ApplicationViewModel : INotifyPropertyChanged
+    class ApplicationViewModel : INotifyPropertyChanged 
     {
         /* Otwieranie/zapisywanie plikow */
         protected IDialogService dialogService;
@@ -29,6 +29,7 @@ namespace KernelFilters
         private RelayCommand changeFilterCommand;
         private RelayCommand setNoiseCommand;
         private RelayCommand acceptMatrixCommand;
+        private RelayCommand loadKernelFromFile;
 
         /* Aktualny filtr/szum */
         private IFilter actualFilter;
@@ -38,11 +39,53 @@ namespace KernelFilters
         public ImageSource LoadedImage => loadedImage;
         public ImageSource FilteredImage => filteredImage;
         public int NoiseScale { get; set; }
-        public int KernelScale { get; set; }
-       
+        public int KernelScale { get; set; } = 1;
+        public Bindable2DArray<int> UserKernel { get; set; } = new Bindable2DArray<int>(5, 5);
+
         public ApplicationViewModel(IDialogService service)
         {
             this.dialogService = service;
+        }
+
+        public RelayCommand LoadKernelFromFile
+        {
+            get
+            {
+                return loadKernelFromFile ??
+                    (loadKernelFromFile = new RelayCommand(obj =>
+                    {
+                        if(dialogService.OpenFileDialog() == true)
+                        {
+                            string kernelPath = dialogService.FilePath;
+                            string[] rowValues;
+                            var iterator = 0;
+                            using (StreamReader sr = new StreamReader(kernelPath))
+                            {
+                                var row = String.Empty;
+                                while((row = sr.ReadLine()) != null)
+                                {
+                                    iterator++;
+                                }
+                                UserKernel = new Bindable2DArray<int>(iterator, iterator);
+                            }
+
+                            var outItearator = 0;
+                            using(StreamReader sr = new StreamReader(kernelPath))
+                            {
+                                var row = string.Empty;
+                                while((row = sr.ReadLine()) != null)
+                                {
+                                    rowValues = row.Split(' ');
+                                    for (int i = 0; i < iterator; i++)
+                                    {
+                                        UserKernel[outItearator, i] = int.Parse(rowValues[i]);
+                                    }
+                                    outItearator++;
+                                }
+                            }
+                        }
+                    }));
+            }
         }
 
         public RelayCommand AcceptMatrixCommand
@@ -52,7 +95,20 @@ namespace KernelFilters
                 return acceptMatrixCommand ??
                     (acceptMatrixCommand = new RelayCommand(obj =>
                     {
-                        MessageBox.Show(KernelScale.ToString());
+                        if(loadedImage != null)
+                        {
+                            var kernelEdge = 3;
+                            /* Jeżeli jest niezerowy element w pierwszym wierszu znaczy macierz konwolucji jest 5x5 */
+                            for (int i = 0; i < 5; i++)
+                                if (UserKernel[0, i] != 0)
+                                {
+                                    kernelEdge = 5;
+                                    break;
+                                }
+                            MatrixConvoluator mc = new MatrixConvoluator(UserKernel, loadedImage, kernelEdge, KernelScale);
+                            filteredImage = mc.Convoluate();
+                            OnPropertyChanged("FilteredImage");
+                        }
                     }));
             }
         }
@@ -151,7 +207,11 @@ namespace KernelFilters
                                 break;
                             case "segregation":
                                 var x = Microsoft.VisualBasic.Interaction.InputBox("Choose channel for segregtion 0 - R, 1 - G, 2 - B", "Segregation Filter", null);
-                                actualFilter = new ChannelSegregation(Int32.Parse(x));
+                                try
+                                {
+                                    actualFilter = new ChannelSegregation(Int32.Parse(x));
+                                }
+                                catch (Exception) { }
                                 break;
                             case "mirror":
                                 actualFilter = new MirrorFilter();
@@ -184,7 +244,11 @@ namespace KernelFilters
                                 actualFilter = new Pixelize();
                                 break;
                         }
-                        filteredImage = actualFilter.Filterize(loadedImage);
+                        try
+                        {
+                            filteredImage = actualFilter.Filterize(loadedImage);
+                        }
+                        catch (NullReferenceException ex) { }
                         OnPropertyChanged("FilteredImage");
                     }));
             }

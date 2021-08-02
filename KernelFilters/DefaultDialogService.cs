@@ -15,7 +15,6 @@ namespace KernelFilters
         public bool OpenFileDialog()
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Image files (*.png, *.bmp, *.jpg)|*.png;*.bmp;*.jpg";
             if (ofd.ShowDialog() == true)
             {
                 FilePath = ofd.FileName;
