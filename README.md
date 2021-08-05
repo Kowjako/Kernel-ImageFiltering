@@ -2,8 +2,17 @@
 Program przedstawia realizację filtrów konwolucyjnych i nie tylko, przedstawiono dużo presetów oraz możliwość dodania rożnego typu szumów, również istnieje możliwość oprócz presetów zrobić swoją macierz konwolucji i zastosować na wybranym obrazku.  
 ***Wszystkie filtry zaimplementowane ręcznie bez użycia gotowych bibliotek***
 # Praca z obrazkiem i pixelami
-# Algorytmy poszczególnych filtrów
-# Klasa Binding2DArray
+
+# Klasa Bindable2DArray
+Ta klasa była napisana z tego powodu że XAML nie pozwala stworzyć **Binding** do tablicy dwuwymiarowej zaś dla jednowymiarowej pozwala, więc ta klasa podmienia indeks tablicy dwuwymiarowej na jakby to był indeks jednowymiarowej bo jeżeli w XAML'u dać  
+```c#
+Binding Path = Array[2,3]
+```
+To nie będzie działało bo rozpoznaje że są dwa indeksy, zaś jeżeli podamy np. **Array[2-3]** to będzie to rozpatrywał jako jednowymiarowa zaś za prawidłową konwersję odpowiada klasa **Bindable2DArray**. W tej klasie jest jeszcze jedna rzecz:
+- Przeciążony operator generyczny **T[,]** który pozwoli castować naszą klasę przedstawiającą tablicę dwuwymiarową na tablicę dwuwymiarową typów prymitywnych, np:
+```c#
+int[,] array = new Bindable2DArray(5,5);
+```
 # Wyniki filtrów
 - Box Blur    
 ![bb](https://user-images.githubusercontent.com/19534189/127917957-7ba69ea8-bf0c-4452-9520-20ab0a84dcf6.jpg)
