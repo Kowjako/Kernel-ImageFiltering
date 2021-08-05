@@ -2,6 +2,50 @@
 Program przedstawia realizację filtrów konwolucyjnych i nie tylko, przedstawiono dużo presetów oraz możliwość dodania rożnego typu szumów, również istnieje możliwość oprócz presetów zrobić swoją macierz konwolucji i zastosować na wybranym obrazku.  
 ***Wszystkie filtry zaimplementowane ręcznie bez użycia gotowych bibliotek***
 # Praca z obrazkiem i pixelami
+Jak wiadomo wszystkie operacje na obrazku przeprowadzane są na pixelach.  
+Więc pokażę pracę z obrazkiem na przykładzie filtru *GrayScale*. Zasada implementacji filtru jest prosta, musimy wziąć składowe pixela (R,G,B) oraz znaleźć średnią i następnie stworzyć pixel gdzie R, G, B będą sobie równe i rownać się wartości średniej.
+## Sposób 1 — Wbudowane metody C#  
+Metody **GetPixel**, **SetPixel** pozwalają operować bezpośrednio na pixelach i dostawać z tych pixeli potrzebne nam kolory, więc implementacja filtru wyglądałaby następująco:  
+```c#
+for (int j = 0; j < startImageBMP.Height; j++)
+{
+    for (int i = 0; i < startImageBMP.Width; i++)
+    {
+         Color pixel = startImageBMP.GetPixel(i,j);
+         byte avg = (pixel.R + pixel.G + pixel.B) / 3;
+         Color newPixel = Color.FromArgb(255, avg, avg, avg);
+         outputImageBMP.SetPixel(i, j, newPixel);
+     }
+}
+```
+## Sposób 2 — Samodzielny za pomocą operacji logicznych  
+```c#
+for (int j = 0; j < startImageBMP.Height; j++)
+{
+    for (int i = 0; i < startImageBMP.Width; i++)
+    {
+         UInt32 pixel = (UInt32)(startImageBMP.GetPixel(i, j).ToArgb());
+
+         float R = (pixel & 0x00FF0000) >> 16;   
+         float G = (pixel & 0x0000FF00) >> 8;
+         float B = (pixel & 0x000000FF);
+
+         R = G = B = (R + G + B) / 3.0f;
+
+         UInt32 newPixel = 0xFF000000 | ((UInt32)R << 16) | ((UInt32)G << 8) | (UInt32)B;
+         outputImageBMP.SetPixel(i, j, System.Drawing.Color.FromArgb((int)newPixel));
+    }
+}
+```
+Co dzieje się tutaj: Jak wiadomo Pixel składa się z 3 kolorów R,G,B każdy z których może przyjmować wartości od 0-255 czyli 1 bajt, jak wiadomo 1 bajt to są dwa znaki HEX.  
+Czyli np. kolor **Cyan(R = 72, G = 209, B = 204) —> w systemie HEX Cyan(R = 48, G = D1, B = CC)** i zawsze jest Alpha-kanał wpisujemy mu zawsze wartość **255(FF)**.  
+Więc w sumie mamy 4 bajty (1 bajt - Alpha kanał, 1 bajt - R, 1 bajt - G, 1 bajt - B) czyli 32 bity, w pamięci komputera ten kolor wygląda następująco: **0xFF48D1CC**.  
+Teraz jeżeli pobieramy używając **GetPixel(i,j).ToArgb()** to on zwróci nam 32-bitowego Int'a.
+I teraz spróbujemy dla tego koloru przekształcić go w GrayScale:  
+1. Pobieramy czerwony, żeby to zrobić mnożymy z maską 0x00FF0000 co nam wyzeruje wszystkie bity oprócz czerwonego, ale następnie trzeba przesunąć bo 0x00FF0000 != 0x000000FF więc dajemy przesunięcie na 16 bitów (1 HEX = 4 bity) w prawo.
+2. Analogicznie pobieramy G i B  
+3. Obliczamy średnią i wpisujemy ją do wartości R, G, B
+4. Pozostaje tylko utworzyć nasz kolor w postaci HEX ze składowych, więc posługujemy się logicznym dodawaniem i trzeba niezapomnieć przesunąć na właściwą pozycję:
 
 # Klasa Bindable2DArray
 Ta klasa była napisana z tego powodu że XAML nie pozwala stworzyć **Binding** do tablicy dwuwymiarowej zaś dla jednowymiarowej pozwala, więc ta klasa podmienia indeks tablicy dwuwymiarowej na jakby to był indeks jednowymiarowej bo jeżeli w XAML'u dać  
