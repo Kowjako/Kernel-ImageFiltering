@@ -1,5 +1,5 @@
 # Filtrowanie obrazów — Kernel i nie tylko 🌄
-Program przedstawia realizację filtrów konwolucyjnych i nie tylko, przedstawiono dużo presetów oraz możliwość dodania rożnego typu szumów, również istnieje możliwość oprócz presetów zrobić swoją macierz konwolucji i zastosować na wybranym obrazku.  
+Program przedstawia realizację filtrów konwolucyjnych i nie tylko, przedstawiono dużo presetów oraz możliwość dodania rożnego typu szumów, również istnieje możliwość oprócz presetów zrobić swoją macierz konwolucji i zastosować na wybranym obrazku lub załadować macierz z pliku.  
 ***Wszystkie filtry zaimplementowane ręcznie bez użycia gotowych bibliotek***
 # Praca z obrazkiem i pixelami
 Jak wiadomo wszystkie operacje na obrazku przeprowadzane są na pixelach.  
