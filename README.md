@@ -4,7 +4,7 @@ Program przedstawia realizację filtrów konwolucyjnych i nie tylko, przedstawio
 # Praca z obrazkiem i pixelami
 Jak wiadomo wszystkie operacje na obrazku przeprowadzane są na pixelach.  
 Więc pokażę pracę z obrazkiem na przykładzie filtru *GrayScale*. Zasada implementacji filtru jest prosta, musimy wziąć składowe pixela (R,G,B) oraz znaleźć średnią i następnie stworzyć pixel gdzie R, G, B będą sobie równe i rownać się wartości średniej.
-## Sposób 1 — Wbudowane metody C#  
+## Sposób 1 — Wbudowane metody C# 👨‍🚒   
 Metody **GetPixel**, **SetPixel** pozwalają operować bezpośrednio na pixelach i dostawać z tych pixeli potrzebne nam kolory, więc implementacja filtru wyglądałaby następująco:  
 ```c#
 for (int j = 0; j < startImageBMP.Height; j++)
@@ -18,7 +18,7 @@ for (int j = 0; j < startImageBMP.Height; j++)
      }
 }
 ```
-## Sposób 2 — Samodzielny za pomocą operacji logicznych  
+## Sposób 2 — Samodzielny za pomocą operacji logicznych 👨‍🔧  
 ```c#
 for (int j = 0; j < startImageBMP.Height; j++)
 {
